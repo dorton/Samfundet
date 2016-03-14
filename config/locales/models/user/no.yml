@@ -1,0 +1,6 @@
+'no':
+  helpers:
+    models:
+      user:
+        one: "bruker"
+        other: "brukere"

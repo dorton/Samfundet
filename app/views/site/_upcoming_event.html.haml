@@ -1,0 +1,23 @@
+.upcoming-event
+  = render 'front_page_lock', index: index
+
+  .what
+    = "%s @ %s" % [t_event_type(event), event.area_title]
+    %br.rwd-break
+    = I18n.l(event.start_time, format: :short)
+
+  %h2
+    = link_to event.title, event
+
+  .ribbon-image-wrapper
+    = link_to event do
+      = background_image_helper "picture", event.image_or_default, size: :medium
+      - if event.front_page_lock && (permitted_to? :manage, :front_page_locks)
+        .locked-border
+          = image_tag "fontawesome/lock24.svg", alt: "Padlock"
+      = render 'events/corner_ribbon', event: event
+
+  .description
+    = render "events/buy_button", event: event
+    %p
+      = event.short_description

@@ -1,0 +1,7 @@
+en:
+  helpers:
+    label:
+      everything_closed_period:
+        closed_from: Closed from (inclusive)
+        closed_to: Closed to (inclusive)
+        message: Message about why it is going to be closed

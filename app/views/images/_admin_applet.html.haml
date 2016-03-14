@@ -1,0 +1,9 @@
+%h2
+  = t('images.admin_applet.title')
+
+%ul
+  %li
+    = link_to t('images.admin_applet.view'), images_path
+  - if permitted_to? :new, :images
+    %li
+      = link_to t('images.admin_applet.new'), new_image_path

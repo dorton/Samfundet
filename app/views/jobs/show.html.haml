@@ -1,0 +1,53 @@
+= render 'admissions/admission_header'
+
+.section
+  .top
+    %h2= set_and_return_title @job.title
+    %div
+      = t('jobs.job_as')
+      %a{ rel: 'tooltip' }
+        = @job.is_officer ? "Funksjonær" : "Gjengmedlem"
+      .tooltip
+        != t('jobs.type_explanation_html')
+      = t('jobs.at')
+      = group_link @job.group
+
+  .job
+    %p
+      = @job.teaser
+    :markdown
+      #{@job.description}
+
+  .other-jobs
+    - unless @similar_available_jobs.empty?
+      .similar-jobs
+        %h3
+          Lignende verv
+        %ul
+          - @similar_available_jobs.each do |job|
+            %li
+              != link_to html_escape(job.title), job_path(job)
+              != t('jobs.at')
+              != abbreviate_long_name(job.group, limit: 15)
+
+    - unless @available_jobs_in_same_group.empty?
+      .same-group-jobs
+        %h3
+          = t('jobs.other_jobs_in')
+          = abbreviate_long_name(@job.group, limit: 26)
+        %ul
+          - @available_jobs_in_same_group.each do |job|
+            %li
+              != link_to html_escape(job.title), job_path(job)
+
+  .col.max
+    - if request.xhr?
+      = link_to @job do
+        - unless @already_applied
+          %button.sexybutton.sexysimple.sexyorange
+            Søk på dette vervet
+        - else
+          %button.sexybutton.sexysimple.sexyred
+            Endre på motivasjonen
+    - else
+      != render partial: 'job_applications/form'

@@ -1,0 +1,47 @@
+.form
+  = semantic_form_for @page, html: { class: 'custom-form' } do |form|
+    = form.inputs do
+      .pages-input
+        .form-content-header
+          %h1
+            = t("pages.norwegian_fields")
+          .form-content-content
+            - if permitted_to? :edit_non_content_fields, @page 
+              = form.input :name_no
+            = form.input :title_no
+            = form.input :content_no, as: :text, hint: t('common.markdown_hint').html_safe
+
+          .form-content-header
+            %h1
+              = t("pages.english_fields")
+          .form-content-content
+            - if permitted_to? :edit_non_content_fields, @page 
+              = form.input :name_en
+            = form.input :title_en
+            = form.input :content_en, as: :text, hint: t('common.markdown_hint').html_safe
+
+          - if permitted_to? :edit_non_content_fields, @page
+            .form-content-header
+              = t("pages.other_fields")
+            .form-content-content
+              = form.input :content_type, collection: PageRevision::CONTENT_TYPES,
+                include_blank: false
+              = form.input :role, collection: Role.all
+          - else
+            / This field exists so the live preview knows which content_type
+            / we are using. It is ignored in the controller.
+            = form.input :content_type, as: :hidden
+
+      .pages-preview
+        %h1
+          = t("pages.norwegian_fields")
+        .preview-container
+          #content_preview_no
+        %h1
+          = t("pages.english_fields")
+        .preview-container
+          #content_preview_en
+
+      .pages-submition
+        = form.actions do
+          = form.action :submit

@@ -1,0 +1,6 @@
+en:
+  helpers:
+    models:
+      interview:
+        one: "interview"
+        other: "interviews"

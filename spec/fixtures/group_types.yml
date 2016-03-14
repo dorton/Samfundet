@@ -1,0 +1,7 @@
+drift_type:
+  description: Driftende
+  priority: 1
+
+media_type:
+  description: Media
+  priority: 2

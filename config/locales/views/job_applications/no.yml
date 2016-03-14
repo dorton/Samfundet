@@ -1,0 +1,36 @@
+'no':
+  job_applications:
+    mine: "Mine søknader"
+    applications_for_group: "Søknader på stillinger i %{group_name}"
+    title_with_applicant_and_job: "%{applicant_name} sin søknad til %{job_title}"
+    cannot_apply_after_deadline: "Du kan ikke legge inn en søknad etter søknadsfristen for dette opptaket."
+    cannot_prioritize_after_deadline: "Du kan ikke omprioritere dine søknader etter omprioriteringsfristen for dette opptaket."
+    find_on_facebook: "Finn %{name} på Facebook"
+    applicant_for: "Søker på <strong>%{job}</strong> hos <strong>%{group}</strong>."
+    application: "Søknad"
+    applications: "Søknader"
+    priority: "Prioritet"
+    job: "Verv"
+    group: "Gjeng"
+    status: "Status"
+    interview_time: "Intervjutid"
+    not_set: "Ikke satt"
+    deadline_has_passed_for_some: "Noen av dine søknader hører til opptak hvor omprioriteringsfristen har utgått."
+    deadline_has_passed_for_all: "Dine søknader tilhører et eller flere opptak hvor omprioriteringsfristen har utgått."
+    log_entries:
+      log_entries: "Loggføringer"
+      description: "Loggføringer knyttes opp mot søkeren, din gjeng og dette opptaket. Det vil si at andre gjenger vil ikke se deres loggføringer. Du vil ikke se disse loggføringene dersom søkeren søker ved neste opptak. Du vil se loggføringene for denne søkeren på eventuelle andre søknader søkeren har ved din gjeng."
+      date_and_time: "Dato og tidspunkt"
+      entry: "Hendelse"
+      logged_by: "Loggført av"
+    forms:
+      new:
+        heading: "Søk på dette vervet"
+        submit: "Søk på dette vervet"
+        motivational_question: "Klar til å søke?"
+        application_explanation: "Skriv inn din motivasjon og dine kvalifikasjoner for dette vervet. Ta gjerne med referanser til tidligere relevant arbeid eller relevante verv. Vi gleder oss til å høre fra deg!"
+        prioritation_explanation: "Etter du er registrert som søker, kan du logge inn for å se status på dine søknader. Hvis du har søkt flere verv, kan de prioriteres etter dine ønsker."
+      edit:
+        heading: "Din søknad"
+        submit: "Oppdater søknaden"
+        withdraw: "Trekk søknaden"

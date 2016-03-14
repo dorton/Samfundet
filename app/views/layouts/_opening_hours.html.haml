@@ -1,0 +1,21 @@
+- cache cache_key_for_standard_hours do
+  .opening-hours
+    .date-today
+      %h2
+        = I18n.l(Date.current, format: :short)
+    %h2
+      = t "site.index.opening_hours_today"
+
+    - if samfundet_closed?
+      %p= samfundet_closed_message
+    - else
+      %table.custom-table
+        %tbody
+          - todays_standard_hours.each do |hours|
+            %tr
+              %td.area
+                = area_link hours.area
+              %td.time
+                = format '%s–%s',
+                    I18n.l(hours.open_time, format: :time),
+                    I18n.l(hours.close_time, format: :time)

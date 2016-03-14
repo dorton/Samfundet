@@ -1,0 +1,11 @@
+%h2
+  = t("events.admin_applet.title")
+
+%ul
+  - if permitted_to? :create, :events
+    %li
+      = link_to t("events.action.new"), new_event_path
+  %li
+    = link_to t("events.admin.title"), admin_events_path
+  %li
+    = link_to t("events.archive.title"), archive_events_path

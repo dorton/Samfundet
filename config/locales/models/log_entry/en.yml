@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      log_entry:
+        one: "log entry"
+        other: "log entries"
+    attributes:
+      log_entry:
+        log: Log

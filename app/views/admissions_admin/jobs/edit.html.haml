@@ -1,0 +1,11 @@
+.section
+  %h2
+    = set_and_return_title(@job.group.name + " - " + @job.admission.title)
+  %p
+    = "Redigér verv under opptak #{@job.admission.title} for gjeng #{@job.group.name}."
+  
+  != render 'form'
+  
+  %p
+    = link_to admissions_admin_admission_group_path(@job.admission, @job.group) do
+      « Tilbake

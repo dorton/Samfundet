@@ -1,0 +1,39 @@
+%h2
+  = t("helpers.models.sulten.all", :n => t("helpers.models.sulten.table.other"))
+  \ - 
+  = link_to t("helpers.models.sulten.new_thing", :n => t("helpers.models.sulten.table.one")), new_sulten_table_path
+%table
+  %th
+    = t("sulten.reservation.table")
+  %th
+    = t("sulten.table.capacity")
+  %th
+    = t("sulten.table.comment")
+  %th
+    = t("sulten.table.available")
+  - Sulten::ReservationType.all.each do |t|
+    %th
+      = t
+  - @tables.each do |t|
+    %tr
+      %td
+        = link_to t.number, t
+      %td
+        = t.capacity
+      %td
+        = t.comment
+      %td
+        - if t.available
+          = t("formtastic.yes")
+        - else
+          = t("formtastic.no")
+      - Sulten::ReservationType.all.each do |r|
+        %td
+          - if t.reservation_types.include? r
+            X
+      %td
+        = link_to t("crud.edit"), edit_sulten_table_path(t)
+      %td
+        = link_to t("crud.destroy"), t, confirm: t("crud.confirm"), method: :delete
+%p
+  = link_to t("common.back"), sulten_admin_path

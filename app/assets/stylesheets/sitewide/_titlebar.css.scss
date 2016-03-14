@@ -1,0 +1,48 @@
+$titlebar-height: 30px;
+$logo-height: $titlebar-height * 1 / 2;
+$image-margin: 5.5px;
+$image-aspect-ratio: 12;
+
+#top-bar {
+    background-color: $samfundet-black;
+    overflow: hidden;
+    color: white;
+
+    height: $titlebar-height;
+
+    #banner-logo {
+      @include media($not-mobile) {
+        float: left;
+        height: $logo-height;
+        width: $logo-height * $image-aspect-ratio;
+        margin-top: $image-margin * 1.5;
+
+        background-image: url(header/Samfundetlogo_hvit.png);
+        background-repeat: no-repeat;
+        background-size: $logo-height * $image-aspect-ratio;
+      }
+    }
+
+    #session-status {
+        float: right;
+        margin-top: 9px;
+        font-weight: bold;
+        font-size: 0.7em;
+
+        .login, .control-panel, .my-applications, .titlebar-change-language-link {
+            text-decoration: none;
+            margin: 0 5px;
+            color: white;
+        }
+
+        .username {
+            display: none;
+            @include media($not-mobile) {
+                display: inline;
+                margin-right: 5px;
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,36 @@
+en:
+  job_applications:
+    mine: "My applications"
+    applications_for_group: "Applications for %{group_name}"
+    title_with_applicant_and_job: "%{applicant_name}'s application for %{job_title}"
+    cannot_apply_after_deadline: "You cannot apply for a position after the deadline for this admission."
+    cannot_prioritize_after_deadline: "You cannot prioritize your applications after the deadline for this admission."
+    deadline_has_passed_for_some: "You can no longer change the priority of some of your applications because the deadline has passed."
+    deadline_has_passed_for_all: "You can no longer change the priority of your applications because the deadline has passed."
+    find_on_facebook: "Find %{name} on Facebook"
+    applicant_for: "Applicant for <strong>%{job}</strong> with <strong>%{group}</strong>."
+    application: "Application"
+    applications: "Applications"
+    priority: "Priority"
+    job: "Job"
+    group: "Group"
+    status: "Status"
+    interview_time: "Interview time"
+    not_set: "Not set"
+    log_entries:
+      log_entries: "Log entries"
+      description: "Log entries are tied to the the applicant in question, your group and this admission. This means that other groups will not see the log entries you add, neither will you if the applicant applies again in a later admission. You will, however, see log entries for any other positions this person has applied for within your group in this admission."
+      date_and_time: "Date & time"
+      entry: "Log entry"
+      logged_by: "Logged by"
+    forms:
+      new:
+        heading: "Apply for this job"
+        submit: "Apply for this job"
+        motivational_question: "Ready to apply?"
+        application_explanation: "Write your motivation for applying and your qualifications for this job. Feel free to add references to previous work or relevant jobs. We look forward to hearing from you!"
+        prioritation_explanation: "After you have registrated as an application, you can log in and check the status of your applications. You may prioritize applications after your own wishes."
+      edit:
+        heading: "Your application"
+        submit: "Update application"
+        withdraw: "Withdraw application"

@@ -1,0 +1,30 @@
+- set_title t('documents.admin')
+
+%p.new
+  = link_to t('documents.new_document'), new_document_path
+
+%table
+  %thead
+    %tr
+      %th= t('documents.title')
+      %th= t('documents.publication_date')
+      %th= t('documents.uploader')
+      %th
+  - @categories.each do |category|
+    %tbody
+      %tr.category
+        %td{colspan: 4}
+          = category.title
+      - if category.documents.empty?
+        %tr.empty
+          %td{colspan: 4}= t('documents.no_documents')
+      - else
+        - category.documents.each do |document|
+          %tr
+            %td= link_to document.title, document.file.url
+            %td= document.publication_date
+            %td= document.uploader.full_name
+            %td
+              - if permitted_to? :destroy, document
+                = link_to t('crud.destroy'), document, confirm: t('documents.confirm_delete'), method: :delete
+

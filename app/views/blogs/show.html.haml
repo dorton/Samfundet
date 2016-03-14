@@ -1,0 +1,30 @@
+= content_for :banner_image do
+  .banner
+    #banner-image-link
+      = background_image_helper "banner-image", @article.image_or_default, size: :large
+
+- cache cache_key_for_blog_show(@article) do
+  - if permitted_to? :manage, :blogs
+    .admin-choices
+      %ul
+        %li
+          = link_to t("crud.create"), new_blog_path
+        %li
+          = link_to t("crud.edit"), edit_blog_path(@article)
+        %li
+          = link_to t("crud.destroy"), @article, confirm: t("crud.destroy"), method: :delete
+        %li
+          = link_to t("blog.admin"), admin_blogs_path
+
+  .blogpost
+    %h1
+      = @article.title
+
+    %p.metadata
+      #{@article.author.full_name}&mdash;#{l @article.publish_at, format: :long}
+
+    :markdown
+      #{@article.content}
+
+    %p
+      = render partial: "shared/disqus", locals: { title: @article.title }

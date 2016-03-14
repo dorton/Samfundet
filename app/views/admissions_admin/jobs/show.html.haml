@@ -1,0 +1,20 @@
+- set_title(t('interviews.administer_interviews'))
+= javascript_include_tag 'old_samfundet/interviews', defer: true
+
+.section
+  .flash.message
+    = T('interviews.possible_to_set_status', date: @admission.admin_priority_deadline)
+  .flash.message.hidden
+  %h2= t('interviews.job_title', job: @job.title)
+
+= render 'jobs_show', job_application_groupings: [@job.job_applications], show_job_titles: false
+
+- if permitted_to?(:hidden_create)
+  = form_tag(hidden_create_admissions_admin_admission_group_job_job_applications_path(@admission, @group, @job)) do
+    = label_tag(:email, "Email")
+    = text_field_tag(:email)
+    = submit_tag("Legg til søknad")
+
+%p
+  = link_to admissions_admin_admission_group_path(@job.admission, @job.group) do
+    = "« #{T('common.back')}"

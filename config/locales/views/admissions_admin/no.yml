@@ -1,0 +1,7 @@
+'no':
+  admissions_admin:
+    statistics_page_title: "Statistikk for %{admission}"
+    summary: "%{admission} har %{applications} søknader på %{jobs} stillinger."
+    applications_by_group: "Fordeling av søkere per gjeng"
+    applications_by_day: "Antall søknader per dag"
+    applications_by_day_for_group: "Antall søknader per dag for %{group}"

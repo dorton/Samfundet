@@ -1,0 +1,17 @@
+en:
+  layouts:
+    application:
+      menu:
+        menu: "Menu"
+        opening_hours: "Opening hours"
+        home: "Home"
+        events: "Events"
+        info: "Information"
+        admissions: "Admissions"
+        login: "Log in"
+        logout: "Log out"
+        change_language: "Norsk"
+        membership: "Membership card"
+        blog: "Blog"
+      admissions: "admissions"
+      samfundets: "the board's"

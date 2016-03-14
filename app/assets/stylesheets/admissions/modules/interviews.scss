@@ -1,0 +1,98 @@
+.admissions_admin\/jobs.show,
+.admissions_admin\/groups.applications {
+  table fieldset {
+    display: inline;
+  }
+
+  table.applications {
+    thead {
+      background-image: -o-linear-gradient(white,#EEE);
+      background-image: -ms-linear-gradient(white,#EEE);
+      background-image: -moz-linear-gradient(white,#EEE);
+      background-image: -webkit-linear-gradient(white,#EEE);
+      background-image: linear-gradient(white,#EEE); }
+    tbody::after
+    {
+      content: '';
+      display: block;
+      height: 15px;
+
+    }
+    tbody:last-child:after {
+      height: 0px;
+    }
+
+    td {
+      border: 1px solid #cccccc; } }
+
+  form.interview ol {
+    font-size: 0.85em;
+    margin-bottom: 0;
+    li {
+      display: inline !important;
+      input[type=text] {
+        width: 12em !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        background-color: white !important;
+          box-shadow: none !important;
+          -moz-box-shadow: none !important;
+          -webkit-box-shadow: none !important;
+      }
+      input[type=submit] {
+        display: none;
+      }
+      select {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      &:after {
+        display: none !important;
+      } } }
+
+  tr.no_job {
+    background-color: #FFF5BC;
+  }
+
+  tr.this_job {
+    background-color: #AEFE9A;
+  }
+
+  tr.this_job_reserved {
+    background-color: #D6FFCC;
+  }
+
+  tr.other_job {
+    background-color: #FFABA8;
+  }
+
+  tr.other_job_reserved {
+    background-color: #FFE1E0;
+  }
+
+  tr.withdrawn {
+    background-color: lightgrey;
+  }
+
+  // This overrides hover styles for assigned by jquery-tablesorter. We don't want the background
+  // color to change as the color indicates the status of the applicant.
+  tr {
+    &.no_job,
+    &.this_job,
+    &.this_job_reserved,
+    &.other_job,
+    &.other_job_reserved,
+    &.withdrawn {
+      td {
+        background-color: transparent;
+      }
+
+      &:hover {
+        td {
+          background-color: transparent !important;
+        }
+      }
+    }
+  }
+}

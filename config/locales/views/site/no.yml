@@ -1,0 +1,24 @@
+'no':
+  site:
+    title: "Norges største studentersamfund"
+    index:
+      og_title: "Studentersamfundet i Trondhjem"
+      og_description: "Studentersamfundet i Trondhjem er en organisasjon for studenter i Trondheim, som eies og drives av sine rundt 9000 medlemmer. Samfundet er Trondheims største kulturinstitusjon."
+
+      add_banner_lock: "Legg til banner-lås"
+      change_banner_lock: "Endre banner-lås"
+
+      add_lock: "Legg til lås"
+      change_lock: "Endre lås"
+      clear_lock: "Fjern lås"
+
+      few_tickets_left: "Få billetter igjen"
+
+      events_today: "Hendelser"
+      no_events_because_closed: "Samfundet er stengt"
+      no_events_today: "Samfundet er åpent! Se åpningstidene for mer informasjon om når de enkelte lokalene er åpne"
+      opening_hours_today: "Åpningstider"
+
+      admissions_frontpage_highjack: "&lt;!-- Hjelp! Samfundet.no trenger webutviklere for å fikse denne feilen. <u>Søk MG::Web i dag!</u> -->"
+      show_more: "Vis alle arrangementer"
+      recieve_message: "Motta nyhetsbrev"

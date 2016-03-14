@@ -1,0 +1,7 @@
+%h1
+  = set_and_return_title t("members.control_panel")
+
+#applets
+  - @applets.each do |applet|
+    .applet
+      = applet.render

@@ -1,0 +1,6 @@
+'no':
+  helpers:
+    models:
+      group_type:
+        one: "gjengtype"
+        other: "gjengtyper"

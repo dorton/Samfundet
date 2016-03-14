@@ -1,0 +1,22 @@
+- set_title @page.title
+
+= render "admin_choices"
+
+.menu-button
+  = t('layouts.application.menu.menu')
+
+.menu
+  .menu-content
+    = render_page_content(@menu.content, @menu.content_type)
+
+.content
+  = render_page_content(@page.content, @page.content_type)
+
+  - if permitted_to? :edit, :pages
+    %p
+      = t("pages.owned_by", owner: @page.role)
+      - if @page.revisions.last.member
+        = link_to t("pages.last_updated_by", name: @page.revisions.last.member.full_name, time: l(@page.revisions.last.created_at)), history_page_path(@page)
+      - else
+        = link_to t("pages.last_updated", time: l(@page.revisions.last.created_at)), history_page_path(@page)
+

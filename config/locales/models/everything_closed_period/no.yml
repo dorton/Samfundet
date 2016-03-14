@@ -1,0 +1,7 @@
+'no':
+  helpers:
+    label:
+      everything_closed_period:
+        closed_from: Stengt fra og med
+        closed_to: Stengt til og med
+        message: Melding om hvorfor det skal være stengt

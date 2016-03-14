@@ -1,0 +1,106 @@
+- set_open_graph_params({ title: @event.title, description: @event.short_description, image: asset_url(@event.image_or_default.url(:large)) })
+- set_twitter_params({ card: "summary_large_image", title: @event.title, description: @event.short_description, "image:src" => asset_url(@event.image_or_default.url(:large)) })
+.billig-buy
+  %h2
+    = t('events.buy_title', event_title: @event.title)
+
+  = form_tag Rails.application.config.billig_path, method: "post", class: 'custom-form' do
+    %table.ticket-table
+      %tr
+        %th
+          = t('events.price_group')
+        %th
+          = t('events.price')
+        %th
+          = t('events.amount')
+        %th
+          = t('events.sum')
+      - @ticket_groups.each do |ticket_group|
+        - if @ticket_groups.length > 1
+          %tr
+            %th
+              = ticket_group.ticket_group_name
+            %th
+            %th
+            %th
+        - if ticket_group.tickets_left?
+          - ticket_group.netsale_billig_price_groups.each do |price_group|
+            %tr.ticket-table-row
+              %td
+                = price_group.price_group_name
+              %td.price{data: {price: price_group.price}}
+                = price_group.price
+              %td
+                = select_tag "price_#{price_group.price_group.to_s}_count",
+                  options_for_select(0..9,
+                    @payment_error_price_groups[price_group.price_group]), tabindex: 1
+              %td.sum
+                = 0
+        - else 
+          %tr
+            %td
+              = t('events.sold_out')
+            %td
+            %td
+            %td
+
+      %tr
+        %td
+          = t('events.total')
+        %td
+        %td.totalAmount
+          = 0
+        %td.totalSum
+          = 0
+
+    %p.payment-choice
+      = radio_button_tag "ticket_type", "card", @payment_error.try(:owner_cardno).present?, checked: true
+      = label_tag "ticket_type_card", t('events.ticketless'), class: 'radio-label'
+      = text_field_tag "cardnumber", @payment_error.try(:owner_cardno) || (current_user.try(:membership_card).try(:card) if current_user.is_a?(Member)), tabindex: 2
+
+    %p.payment-choice
+      = radio_button_tag "ticket_type", "paper", @payment_error.try(:owner_email).present?
+      = label_tag "ticket_type_paper", t('events.paperticket'), class: 'radio-label'
+      = text_field_tag :email, @payment_error.try(:owner_email), tabindex: 2
+      = label_tag "email_confirmation", t('events.confirm_email')
+      = text_field_tag :email_confirmation, @payment_error.try(:owner_email), tabindex: 3
+      %span#email_feedback
+        &nbsp;
+
+
+    %h4
+      = t('events.about_ticket')
+    %ul
+      %li
+        = t('events.about_ticketless_html')
+      %li
+        = t('events.about_paperticket_html')
+
+    .payment-wrapper
+      %h3
+        = t('events.payment_information')
+      .payment-info
+        %p
+          = label_tag "ccno", t('events.visa_or_master')
+          = text_field_tag "ccno", nil, maxlength: 16, tabindex: 4, autocomplete: 'off', required: true
+          %span#card_feedback
+            &nbsp;
+        .payment-exp
+          = label_tag "exp_month", t('events.expiration_month')
+          = select_tag "exp_month", options_for_select(1..12), tabindex: 5, required: true
+          = select_tag "exp_year", options_for_select((Time.current.year..10.years.from_now.year).map { |y| [y, y % 100] }), tabindex: 6, required: true
+        .payment-cvc2
+          = label_tag "cvc2","CVC2:"
+          = text_field_tag "cvc2", nil, maxlength: 3, tabindex: 7, autocomplete: 'off', required: true
+      .payment-verified
+        = image_tag('billig/payex-swedbank.png', alt: "PayEx logo and Swedbank logo")
+        = image_tag('billig/vbv-securecode.png', alt:"Verfied by VISA logo and MasterCard SecureCode logo")
+        .payex
+          = link_to t('events.payex'), 'http://payex.no', target: '_blank'
+        .fees
+          = t('events.payment_prices')
+        .terms
+          = link_to t('events.terms'), Page.tickets, target: '_blank'
+
+      .payment-submit
+        = submit_tag t('events.commit_buy'), name: "commit", tabindex: 8

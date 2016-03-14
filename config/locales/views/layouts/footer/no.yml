@@ -1,0 +1,8 @@
+"no":
+  layouts:
+    footer:
+      contact: "Lurer du på noe? <a href=\"%{path}\">Kontakt oss</a>."
+      mainsponsor: "Hovedsponsor"
+      festivals: "Festivaler"
+      othersponsors: "Sponsorer"
+      top: "topp"

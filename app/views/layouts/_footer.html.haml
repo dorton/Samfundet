@@ -1,0 +1,42 @@
+#sponsors
+  #othersponsors
+    .sponsortext
+      = t('layouts.footer.othersponsors')
+    .logo
+      %a.muo-icon{ href: 'http://www.musikkutstyrsordningen.no/', target: '_blank' }
+  #partners
+    .sponsortext
+      = t('layouts.footer.festivals')
+    .logo
+      %a.isfit-icon{ href: 'http://www.isfit.org/', target: '_blank' }
+      %a.uka-icon{ href: 'https://www.uka.no/', target: '_blank' }
+#footer
+  #footer-wrapper
+    #contact-editors
+      %ul
+        %li
+          = t('layouts.footer.contact', path: contact_path).html_safe
+    #social
+      %ul
+        %li
+          = link_to 'https://facebook.com/samfundet', target: "_blank" do
+            Facebook
+            = image_tag 'facebook_36.png', alt: 'Like us on Facebook'
+        %li
+          = link_to 'https://instagram.com/samfundet', target: "_blank" do
+            Instagram
+            = image_tag 'instagram_36.png', alt: 'See our images on Instagram'
+        %li
+          = link_to 'https://open.spotify.com/user/samfundet', target: "_blank" do
+            Spotify 
+            = image_tag 'logos/spotify.png' , alt: "Check out our Spotify playlists"
+        %li
+          = link_to 'https://twitter.com/samfundet', target: "_blank" do
+            Twitter
+            = image_tag 'twitter_36.png', alt: 'See our tweets on Twitter'
+    #contact
+      %ul
+        %li &copy; Studentersamfundet i Trondhjem #{Time.current.year}
+        %li Org.nr: 970 088 466
+        %li Elgeseter gate 1
+        %li 7030 Trondheim

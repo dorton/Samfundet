@@ -1,0 +1,9 @@
+Hei <%= @reservation.first_name %>, reservasjonen din hos Lyche er registrert!
+
+Dato: <%= I18n.l(@reservation.reservation_from, format: :long) %>-<%= I18n.l(@reservation.reservation_to, format: :time) %>
+Antall personer: <%= @reservation.people %>
+Anledning: <%= @reservation.reservation_type.to_s %>
+Allergier / andre beskjeder: <%= @reservation.allergies %>
+Telefonnummer: <%= @reservation.telephone %>
+
+For endring eller avbestilling av reservasjonen, vennligst send mail til lyche@samfundet.no

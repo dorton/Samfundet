@@ -1,0 +1,15 @@
+en:
+  helpers:
+    models:
+      applicant:
+        one: "applicant"
+        other: "applicants"
+    label:
+      applicant:
+        firstname: "First name"
+        surname: "Surname"
+        email: "Email"
+        hashed_password:
+        phone: "Phone number"
+        age: "Age"
+        sex: "Sex"

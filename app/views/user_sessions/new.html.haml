@@ -1,0 +1,12 @@
+- set_title t("user_sessions.new.title")
+
+- if @active_admissions_exist
+  #admission-notice.flash.message
+    != t("user_sessions.new.available_admission", link_to_admissions: link_to(t('helpers.models.admission.other'), admissions_path))
+
+.login-form.member{ class: @active_admissions_exist ? "open-admission" : "" }
+  = render 'member_sessions/form', redirect_to: @redirect_to
+
+- if @active_admissions_exist
+  .login-form.applicant{ class: @active_admissions_exist ? "open-admission" : "" }
+    = render 'applicant_sessions/form', redirect_to: @redirect_to

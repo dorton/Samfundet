@@ -1,0 +1,30 @@
+= semantic_form_for admission do |form|
+  = form.inputs do
+    != form.input :title
+    != form.input :shown_from,
+                  as: :string,
+                  input_html: { class: "datetimepicker",
+                                value: admission.shown_from ? admission.shown_from : '',
+                                placeholder: "DD.MM.YYYY HH:MM" }
+    != form.input :shown_application_deadline,
+                  as: :string,
+                  input_html: { class: "datetimepicker",
+                                value: admission.shown_application_deadline ? admission.shown_application_deadline : '',
+                                placeholder: "DD.MM.YYYY HH:MM" }
+    != form.input :actual_application_deadline,
+                  as: :string,
+                  input_html: { class: "datetimepicker",
+                                value: admission.actual_application_deadline ? admission.actual_application_deadline : '',
+                                placeholder: "DD.MM.YYYY HH:MM" }
+    != form.input :user_priority_deadline,
+                  as: :string,
+                  input_html: { class: "datetimepicker",
+                                value: admission.user_priority_deadline ? admission.user_priority_deadline : '',
+                                placeholder: "DD.MM.YYYY HH:MM" }
+    != form.input :admin_priority_deadline,
+                  as: :string,
+                  input_html: { class: "datetimepicker",
+                                value: admission.admin_priority_deadline ? admission.admin_priority_deadline : '',
+                                placeholder: "DD.MM.YYYY HH:MM" }
+  = form.actions do
+    != form.action :submit

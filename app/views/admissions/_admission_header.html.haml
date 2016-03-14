@@ -1,0 +1,9 @@
+#admission-header
+  .youtube-video
+    %iframe{ src: "https://www.youtube.com/embed/_RkF81v9U-M", frameborder: 0, allowfullscreen: true }
+  #navigation
+    = link_to  t('jobs.all_jobs'), admissions_path
+    - if current_user.kind_of? Applicant
+      = link_to t('jobs.your_applications'), job_applications_path
+    - else
+      = link_to t('applicants.register_as_an_applicant'), applicants_login_path

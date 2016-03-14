@@ -1,0 +1,18 @@
+'no':
+  blogs:
+    admin_applet:
+      title: Blogginnlegg
+      new_blog: Nytt innlegg
+      administrate: Administrer blogginlegg
+
+      future_categories: Framtidige kategorier
+      written_by: Skrevet av
+      updated_at: Oppdatert
+      created_by: Laget av
+      published: Publisert
+      published_at: Publisert
+      no_time_certified: Intet tidspunkt sertifisert
+
+    new:
+      blog_post: Bloginnlegg
+

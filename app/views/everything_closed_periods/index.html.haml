@@ -1,0 +1,23 @@
+- set_title t('everything_closed_periods.index_title')
+
+%table
+  %caption
+    %h2= t('everything_closed_periods.table_caption')
+  %tr
+    %th= t('everything_closed_periods.message')
+    %th= t('everything_closed_periods.from')
+    %th= t('everything_closed_periods.to')
+    %th= t('crud.edit')
+    %th= t('crud.destroy')
+  - @current_and_future_closed_times.each do |ecp|
+    %tr
+      %td= ecp.message
+      %td= ecp.closed_from.to_date
+      %td= ecp.closed_to.to_date
+      %td= link_to t('crud.edit'), edit_everything_closed_period_path(ecp.id)
+      %td= link_to t('crud.destroy'), everything_closed_period_path(ecp.id), confirm: t('crud.confirm'), method: :delete
+  %tfoot
+    %tr
+      %td{colspan: 5}= link_to t('everything_closed_periods.add_new_link'), new_everything_closed_period_path
+
+= link_to t('common.back'), members_control_panel_path

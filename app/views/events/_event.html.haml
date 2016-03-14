@@ -1,0 +1,20 @@
+%tr
+  %td.event-title
+    = link_to event.title, event
+
+  %td.event-area-start-time
+    = from_to_string event
+    %br
+    = area_link event.area
+
+  %td.event-start-time
+    = from_to_string event
+
+  %td.event-area
+    = area_link event.area, event.area_title
+
+  %td.event-price
+    = inline_event_price event
+
+  %td.event-buy
+    = render "buy_button", event: event

@@ -1,0 +1,14 @@
+'no':
+  helpers:
+    models:
+      role:
+        one: "rolle"
+        other: "roller"
+    attributes:
+      role:
+        title: "Tittel"
+        name: "Navn"
+        description: "Beskrivelse"
+        passable: "Videreførbar til annet medlem?"
+        role: "Foreldrerolle"
+        group: "Tilhører gjeng"

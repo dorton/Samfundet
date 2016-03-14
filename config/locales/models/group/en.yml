@@ -1,0 +1,6 @@
+en:
+  helpers:
+    models:
+      group:
+        one: "group"
+        other: "groups"

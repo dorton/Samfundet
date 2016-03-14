@@ -1,0 +1,7 @@
+en:
+  admissions_admin:
+    statistics_page_title: "Statistics for %{admission}"
+    summary: "%{admission} has %{applications} applications and %{jobs} jobs."
+    applications_by_group: "Distribution of applicants by group"
+    applications_by_day: "Number of applications per day"
+    applications_by_day_for_group: "Number of applications per day for %{group}"

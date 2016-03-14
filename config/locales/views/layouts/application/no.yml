@@ -1,0 +1,17 @@
+"no":
+  layouts:
+    application:
+      menu:
+        menu: "Meny"
+        opening_hours: "Åpningstider"
+        home: "Hovedsiden"
+        events: "Arrangement"
+        info: "Informasjon"
+        admissions: "Opptak"
+        login: "Logg inn"
+        logout: "Logg ut"
+        change_language: "English"
+        membership: "Medlemskort"
+        blog: "Blogg"
+      admissions: "opptak"
+      samfundets: "styret sin"

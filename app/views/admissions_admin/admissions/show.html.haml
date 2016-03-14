@@ -1,0 +1,10 @@
+.section
+  %h2= set_and_return_title T('admissions.my_groups')
+  %ul
+    - @my_groups.sort.each do |group|
+      %li
+        = link_to admissions_admin_admission_group_path(@admission, group) do
+          = group.name
+    - if @my_groups.empty?
+      %li
+        %p= t('admissions.no_groups')

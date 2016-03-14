@@ -1,0 +1,6 @@
+'no':
+  helpers:
+    models:
+      interview:
+        one: "intervju"
+        other: "intervju"

@@ -1,0 +1,21 @@
+%h2
+  = t("helpers.models.sulten.all", :n => t("helpers.models.sulten.reservation_type.other"))
+  \ - 
+  = link_to t("helpers.models.sulten.new", :n => t("helpers.models.sulten.reservation_type.one")), new_sulten_reservation_type_path
+%table
+  %th
+    = t("sulten.reservation_type.name")
+  %th
+    = t("sulten.reservation_type.description")
+  - @types.each do |t|
+    %tr
+      %td
+        = link_to t.name, t
+      %td
+        = t.description
+      %td
+        = link_to t("crud.edit"), edit_sulten_reservation_type_path(t)
+      %td
+        = link_to t("crud.destroy"), t, confirm: t("crud.confirm"), method: :delete
+%p
+  = link_to t("common.back"), sulten_admin_path

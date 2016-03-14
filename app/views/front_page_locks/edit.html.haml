@@ -1,0 +1,18 @@
+%h2= t('front_page_lock.title', position: @front_page_lock.position)
+
+= semantic_form_for @front_page_lock do |f|
+  = f.inputs name: 'lock type' do
+    %li
+      = f.label :lockable_type, value: Event.name do
+        = "Use event"
+        = f.radio_button :lockable_type, Event.name, checked: true
+      = f.input :event_id, as: :select, collection: options_from_collection_for_select(@upcoming_events, 'id', 'to_s', @front_page_lock.lockable_id)
+    %li
+      = f.label :lockable_type, value: Blog.name do
+        = "Use blog"
+        = f.radio_button :lockable_type, Blog.name
+      = f.input :blog_id, as: :select, collection: options_from_collection_for_select(@blogs, 'id', 'to_s', @front_page_lock.lockable_id)
+
+  = f.actions do
+    = f.action :submit
+    = f.action :cancel

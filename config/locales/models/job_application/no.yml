@@ -1,0 +1,9 @@
+'no':
+  helpers:
+    models:
+      job_application:
+        one: "søknad"
+        other: "søknader"
+    label:
+      job_application:
+        motivation: Motivasjon

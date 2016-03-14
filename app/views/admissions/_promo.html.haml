@@ -1,0 +1,33 @@
+= render 'admission_header'
+
+#promo
+  %h2
+    = admission.title
+    %br
+    = "#{t('admissions.deadline')}:"
+    =l admission.shown_application_deadline, format: :short
+    - if admission.shown_application_deadline < Time.current
+      %br
+      %span{ style: "color: #a03033; text-decoration: underline; font-size: 0.9em;" }
+        Utvidet til
+        = l admission.actual_application_deadline, format: :short
+  %p
+    = t('admissions.admission_promo')
+    %br
+    - if permitted_to?(:manage, :admissions)
+      [
+      = link_to edit_admission_path(admission) do
+        = t('admissions.edit_admission')
+      ]
+
+    - if permitted_to?(:show, :admissions_admin_admissions)
+      [
+      = link_to admissions_admin_admission_path(admission) do
+        = t('admissions.administer_my_group')
+      ]
+
+    - if permitted_to?(:statistics, :admissions_admin_admissions)
+      [
+      = link_to statistics_admissions_admin_admission_path(admission) do
+        = t('admissions.statistics')
+      ]

@@ -1,0 +1,43 @@
+.section
+  %h2
+    - if @role.group
+      = set_and_return_title "#{@role.name}: #{@role.title} (#{@role.group.name})"
+    - else
+      = set_and_return_title "#{@role.name}: #{@role.title}"
+  %p
+    = @role.description
+  - if @role.role
+    %p
+      / 'roles.child_role_of' contains HTML, hence html_safe
+      = t('roles.child_role_of',
+          role: link_to(@role.role.title, @role.role)).html_safe
+  - unless @role.roles.empty?
+    %p
+      / 'roles.has_child_roles' also contains HTML
+      = t('roles.has_child_roles',
+          roles: @role.roles.map{ |r| link_to r.title, r }.join(' ')).html_safe
+  - if permitted_to?(:edit, @role)
+    %p
+      - if permitted_to?(:edit, @role)
+        = link_to t('roles.edit_role'), edit_role_path(@role),
+                  { class: "sexybutton sexysimple sexyred" }
+  - unless @role.members_roles.empty?
+    %table
+      %tr
+        %th= t('roles.member_name')
+        %th &nbsp;
+      - @role.members_roles.each do |members_role|
+        %tr
+          %td
+            = members_role.member.full_name
+          %td
+            = link_to t('roles.remove_member'),
+                      [@role, members_role],
+                      method: :delete,
+                      confirm: t('crud.confirm')
+  %h2= t('roles.add_member')
+  = form_tag role_members_roles_path(@role), method: :post do
+    %p
+      != label_tag "member_autocomplete", t('roles.member_autocomplete_label')
+      != text_field_tag "member_id", nil, class: "member_autocomplete"
+      != submit_tag t('roles.add_member_submit')

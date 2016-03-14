@@ -1,0 +1,24 @@
+en:
+  site:
+    title: "Norway's largest student society"
+    index:
+      og_title: "Student Society in Trondheim"
+      og_description: "Student Society in Trondheim is an organization for students in Trondheim, owned and run by it's 9000 members. The Student Society is Trondheims largest culture organization." 
+
+      add_banner_lock: "Add banner lock"
+      change_banner_lock: "Change banner lock"
+
+      add_lock: "Add lock"
+      change_lock: "Change lock"
+      clear_lock: "Remove lock"
+
+      few_tickets_left: "Few tickets left"
+
+      events_today: "Events"
+      no_events_because_closed: "Samfundet is closed today"
+      no_events_today: "Samfundet is open today! See the opening hours for more information about when the different venues are open."
+      opening_hours_today: "Opening hours"
+
+      admissions_frontpage_highjack: "&lt;!-- Help! Samfundet.no needs developers to fix this error. <u>Apply to MG::Web today!</u> -->"
+      show_more: "Show all events"
+      recieve_message: "Receive newsletter"

@@ -1,0 +1,11 @@
+- if permitted_to? :manage, :front_page_locks
+  - lock = FrontPageLock.find_by_position(index)
+  - if lock.try(:lockable)
+    .front-page-lock-actions
+      = link_to edit_front_page_lock_path(lock) do
+        = t('site.index.change_lock')
+      = link_to clear_front_page_lock_path(lock), method: :post do
+        = t('site.index.clear_lock')
+  - else
+    = link_to edit_front_page_lock_path(index) do
+      = t('site.index.add_lock')

@@ -1,0 +1,11 @@
+.search-results
+  .event-group
+    %h3= t('search.results_title')
+    - if @events.present?
+      - @events.group_by {|i| i.start_time.to_date }.sort.each do |date, events|
+        %h2= l(date, format: :medium_long)
+        %table.custom-table
+          %tbody
+            = render events.sort_by{|event| event.start_time}
+    - else
+      %p= t('search.no_results')

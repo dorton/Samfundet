@@ -1,0 +1,12 @@
+.image-actions
+  - if permitted_to? :new, :images
+    %p= link_to t('images.admin_applet.new'), new_image_path
+
+= render 'search_form'
+
+%p
+  = t('images.search_results')
+
+.ajax-results
+.existing-results
+  = render 'image_list'

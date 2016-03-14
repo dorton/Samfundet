@@ -1,0 +1,11 @@
+= form_tag search_images_path, method: :get, class: 'custom-form search-form images-search-form', autocomplete: 'off' do
+  = search_field_tag 'search', params[:search], placeholder: t('images.search')
+
+%p
+  = t('images.tags')
+
+%ul.tag-list
+  - Tag.by_images_count.each do |tag|
+    %li
+      = link_to search_images_path({ search: tag.name }), data: { tag: tag.name }, class: 'tag' do
+        = "#{tag.name} (#{tag.images_count})"

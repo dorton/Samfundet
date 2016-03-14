@@ -1,0 +1,158 @@
+.admissions_admin\/job_applications.show {
+  h2{
+    text-align: center;
+    @include emph-link($samfundet-blue);
+  }
+
+
+  .section {
+    margin-top: 20px;
+    @include span-columns(12);
+
+    .content {
+      margin-bottom: 20px;
+
+      @include media($tablet-desktop){
+        @include shift(2);
+        @include span-columns(8);
+      }
+
+      h3 {
+        text-align: center;
+        @include emph-link($samfundet-blue);
+      }
+
+      .information{
+        text-align: center;
+        list-style-type: none;
+
+        table{
+          margin: 20px 0 55px 0;
+          width: 50%;
+          @include shift(3);
+        }
+      }
+    }
+
+    .log{
+      @include media($tablet-desktop){
+        @include span-columns(12);
+        margin-top: 20px;
+      }
+    }
+
+    .soknader{
+      @include media($tablet-desktop){
+        @include span-columns(12);
+      }
+    }
+  }
+}
+
+.jobs.show {
+  h2 {
+    background-color: $samfundet-light-grey;
+    padding: 15px;
+  }
+
+  .section {
+    @include span-columns(12);
+
+    .top {
+      text-align: center;
+    }
+
+    .job {
+      margin: auto 20px;
+      font-weight: lighter;
+      font-size: 1.1em;
+      margin-bottom: 40px;
+
+      @include media($not-mobile) {
+        @include shift(1);
+        @include span-columns(10);
+        @include omega;
+      }
+    }
+
+    #job-application {
+      @include span-columns(12);
+
+      background-color: $samfundet-light-grey;
+      padding: 5px 20px;
+
+      @include media($not-mobile) {
+        padding: 5px 0;
+      }
+
+      h3 {
+        text-align: left;
+      }
+
+      #apply-description {
+        @include media($not-mobile) {
+          @include shift(1);
+          @include span-columns(5);
+        }
+
+        p {
+          font-weight: lighter;
+          font-size: 1.1em;
+        }
+      }
+
+      .textarea-wrapper {
+        @include media($not-mobile) {
+          @include span-columns(5);
+        }
+
+        textarea {
+          width: 100%;
+        }
+
+        .submit-button-container {
+          text-align: right;
+
+          @include media($not-mobile) {
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    .other-jobs {
+      @include span-columns(12);
+      padding-right: 20px;
+      padding-left: 20px;
+
+      @include media($not-mobile) {
+        padding-right: 0;
+        padding-left: 0;
+
+        @include shift(1);
+        @include span-columns(10);
+      }
+
+      .similar-jobs, .same-group-jobs {
+        margin-bottom: 40px;
+
+        @include media($not-mobile) {
+          @include span-columns(5);
+        }
+
+        h3 {
+          text-align: left;
+        }
+
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+        }
+      }
+    }
+
+    .col.max {
+      @include span-columns(12);
+    }
+  }
+}

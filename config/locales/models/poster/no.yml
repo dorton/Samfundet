@@ -1,0 +1,8 @@
+'no':
+  helpers:
+    models:
+      poster:
+        zero: "ingen plakater"
+        one: "plakat"
+        other: "plakater"
+    #label:

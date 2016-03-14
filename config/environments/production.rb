@@ -1,0 +1,82 @@
+# -*- encoding : utf-8 -*-
+Samfundet::Application.configure do
+  # Settings specified here will take precedence over those in config/environment.rb
+
+  # Define our logger and set it to rotate the log monthly
+  config.logger = Logger.new(Rails.root.join('log/production.log'), shift_age='monthly')
+
+  # The production environment is meant for finished, "live" apps.
+  # Code is not reloaded between requests
+  config.cache_classes = true
+
+  # Full error reports are disabled and caching is turned on
+  config.consider_all_requests_local        = false
+  config.action_controller.perform_caching  = true
+  config.action_view.cache_template_loading = true
+
+  config.active_support.deprecation = :notify
+
+  # See everything in the log (default is :info)
+  # config.log_level = :debug
+
+  # Use a different logger for distributed setups
+  # config.logger = SyslogLogger.new
+
+  # Use a different cache store in production
+  config.cache_store = :mem_cache_store, 'localhost:11211', { namespace: 'production' }
+
+  # Enable serving of images, stylesheets, and javascripts from an asset server
+  # config.action_controller.asset_host = "http://assets.example.com"
+
+  # Disable Rails's static asset server (Apache or nginx will already do this)
+  config.serve_static_assets = false
+
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
+
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Enable automatic asset invalidation
+  config.assets.digest = true
+
+  # Disable delivery errors, bad email addresses will be ignored
+  # config.action_mailer.raise_delivery_errors = false
+
+  # Enable threaded mode
+  # config.threadsafe!
+
+  Haml::Template.options[:ugly] = :true
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'samfundet.no', protocol: 'https'  }
+
+  # set delivery method to :smtp, :sendmail or :test
+  config.action_mailer.delivery_method = :sendmail
+
+  # these options are only needed if you choose smtp delivery
+  config.action_mailer.sendmail_settings = {
+    location: '/usr/sbin/sendmail',
+    arguments: '-i'
+  }
+
+  config.billig_path = "https://billettsalg.samfundet.no/pay".freeze
+  config.billig_ticket_path = 'https://billig.samfundet.no/pdf?'.freeze
+
+  config.after_initialize do
+    billig_table_prefix = "billig."
+    billig_tables = [BilligEvent, BilligTicketGroup, BilligPriceGroup, BilligPaymentError, BilligPaymentErrorPriceGroup, BilligTicket, BilligPurchase, BilligTicketCard]
+
+    billig_tables.each do |table|
+      table.establish_connection(:billig)
+      table.table_name = billig_table_prefix + table.name.gsub(/Billig/, '').underscore
+    end
+  end
+end
+
+SamfundetAuth.setup do |config|
+  config.member_database = :mdb2
+  config.member_table = :lim_medlemsinfo
+end
+
+Paperclip.options[:command_path] = '/usr/bin/'

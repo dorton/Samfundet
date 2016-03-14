@@ -1,0 +1,43 @@
+en:
+  sulten:
+    reservation:
+      title: "Reservations this week:"
+      no_reservations: "No reservations"
+      no_reservations_this_week: "No reservations this week"
+      show_all: "Show all"
+      name: "Name"
+      time: "Time"
+      people: "No. persons"
+      reservation_type: "Occasion"
+      table: "Table"
+      name: "Name"
+      telephone: "Telephone number"
+      email: "Email"
+      allergies: "Allergies / other stuff"
+      internal_comment: "Internal comment"
+      form:
+        title: "lyche reservation"
+        intro1: "Fill in and submit the form below to make a reservation at Lyche"
+        intro2: "Currently you may only make reservations for time periods between 4 pm and 10 pm, and a reservation must be made no later than the day before it begins."
+        intro3: "In order to change or cancel a reservation, please send an email to "
+        too_many: "more than 12 persons? send us a "
+        from: "beginning time of reservation"
+        duration: "duration"
+        type_explanation: "what is the purpose of the visit? this helps determine the sort of table you will be given"
+        create: "make reservation"
+        update: "update reservation"
+      show:
+        from: "Reserved from"
+        to: "Reserved until"
+      success:
+        line1: "Your reservation at Lyche was successfully made!"
+        line2: "You should be getting an email shortly, containing the details of your reservation."
+        line3_html: "If you do not get an email, please notify"
+    table:
+      number: "Number"
+      capacity: "Capacity"
+      comment: "Comment"
+      available: "Available"
+    reservation_type:
+      name: "Name"
+      description: "Description"

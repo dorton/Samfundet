@@ -1,0 +1,7 @@
+- set_title t("events.admin.title")
+
+- if permitted_to? :new, :events
+  %p.new
+    = link_to t("events.action.new"), new_event_path
+
+= render 'admin_list'

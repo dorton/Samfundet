@@ -1,0 +1,20 @@
+.flash {
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $samfundet-white;
+
+    &.error {
+        background-color: $samfundet-red;
+    }
+
+    &.success {
+        background-color: $samfundet-green;
+    }
+
+    &.message {
+        background-color: $samfundet-purple;
+    }
+}

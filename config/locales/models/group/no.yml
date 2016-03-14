@@ -1,0 +1,6 @@
+'no':
+  helpers:
+    models:
+      group:
+        one: "gjeng"
+        other: "gjenger"

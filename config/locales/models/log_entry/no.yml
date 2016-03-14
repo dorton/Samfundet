@@ -1,0 +1,9 @@
+'no':
+  activerecord:
+    models:
+      log_entry:
+        one: "loggføring"
+        other: "loggføringer"
+    attributes:
+      log_entry:
+        log: Logg

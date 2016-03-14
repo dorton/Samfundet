@@ -1,0 +1,24 @@
+'no':
+  groups:
+    leader: Leder
+    phone: Telefonnummer
+    email: E-post
+    name: Navn
+    abbreviation: Forkortelse
+    website: Webside
+    type: Gruppetype
+    show_all: Vis alle gjenger
+    job_title: Stillingstittel
+    applicants: Søkere
+    job_type: Stillingstype
+    job_listing: Stillingsutlysning
+    edit_job: Rediger verv
+    delete_job: Slett verv
+    edit_group: Rediger gjeng
+    create_group: Opprett gjeng
+
+    admin:
+      title: Administrer gjenger
+
+    admin_applet:
+      title: Gjenger

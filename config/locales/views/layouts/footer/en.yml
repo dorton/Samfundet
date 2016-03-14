@@ -1,0 +1,8 @@
+en:
+  layouts:
+    footer:
+      contact: "Need help? <a href=\"%{path}\">Contact us</a>."
+      mainsponsor: "Main sponsor"
+      festivals: "Festivals"
+      othersponsors: "Sponsors"
+      top: "top"

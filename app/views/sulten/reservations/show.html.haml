@@ -1,0 +1,55 @@
+%table
+  %th
+    = t("sulten.reservation.show.from")
+  %td
+    = @reservation.reservation_from
+  %tr
+    %th
+      = t("sulten.reservation.show.to")
+    %td
+      = @reservation.reservation_to
+  %tr
+    %th
+      = t("sulten.reservation.people")
+    %td
+      = @reservation.people
+  %tr
+    %th
+      = t("sulten.reservation.table")
+    %td
+      = @reservation.table
+  %tr
+    %th
+      = t("sulten.reservation.reservation_type")
+    %td
+      = @reservation.reservation_type
+  %tr
+    %th
+      = t("sulten.reservation.name")
+    %td
+      = @reservation.name
+  %tr
+    %th
+      = t("sulten.reservation.telephone")
+    %td
+      = @reservation.telephone
+  %tr
+    %th
+      = t("sulten.reservation.email")
+    %td
+      = @reservation.email
+  %tr
+    %th
+      = t("sulten.reservation.allergies")
+    %td
+      = @reservation.allergies
+  %tr
+    %th
+      = t("sulten.reservation.internal_comment")
+    %td
+      = @reservation.internal_comment
+  
+%p
+  = link_to t("crud.edit"), [:edit, @reservation]
+  = link_to t("crud.destroy"), @reservation, method: :delete, data: {confirm: t("crud.confirm")}
+  = link_to t("common.back"), sulten_reservations_path
