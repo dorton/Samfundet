@@ -78,40 +78,15 @@ class Sulten::Reservation < ActiveRecord::Base
   end
 
   def self.lyche_open? from, to
-    lycheIsOpeningHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0].hour
-    lycheIsOpeningMinute = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0].min
-    lycheIsClosingHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0].hour
-    lycheIsClosingMin = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0].min
-    if lycheIsOpeningHour == from.hour
-      return lycheIsOpeningMinute <= from.min
-    elsif lycheIsClosingHour == to.hour
-      return lycheIsClosingMin >= to.min
-    elsif (lycheIsOpeningHour..lycheIsClosingHour).include?(from.hour..to.hour)
-      return true
-    else
-      return false
-    end
+    lycheOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0]
+    lycheClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0]
+    return (lycheOpen.strftime( "%H%M%S" )..lycheClose.strftime("%H%M%S")).include?(from.strftime( "%H%M%S" )..to.strftime( "%H%M%S" ))
   end
 
   def self.kitchen_open? from, to
     kitchenOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0]
     kitchenClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0]
-   # kitchenIsOpeningHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0].hour
-   # kitchenIsOpeningMinute = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0].min
-   # kitchenIsClosingHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0].hour
-   # kitchenIsClosingMin = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0].min
-
     return (kitchenOpen.strftime( "%H%M%S" )..kitchenClose.strftime("%H%M%S")).include?(from.strftime( "%H%M%S" )..to.strftime( "%H%M%S" ))
-    
 
-   # if kitchenIsOpeningHour == from.hour
-   #   return kitchenIsOpeningMinute <= from.min
-   # elsif kitchenIsClosingHour == to.hour
-   #   return kitchenIsClosingMin >= to.min
-   # elsif (kitchenIsOpeningHour+1..kitchenIsClosingHour-1).include?(from.hour..to.hour)
-   #   return true
-   # else
-   #   return false
-   # end
   end
 end
