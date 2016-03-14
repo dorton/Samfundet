@@ -1,0 +1,19 @@
+%h1
+  Sulten Admin
+- @lyche_opening_hours.each do |f|
+  %p
+    ------
+    //= link_to "Rediger", edit_sulten_lyche_opening_hour_path(f)
+  = semantic_form_for f, html: { class: 'custom-form' } do |k|
+    = k.inputs do
+      %h2=@weekdays[f.day_number]
+      = k.input :openLyche, as: :time_picker
+      = k.input :closeLyche, as: :time_picker
+      = k.input :openKitchen, as: :time_picker
+      = k.input :closeKitchen, as: :time_picker
+      //= k.input :day_number, as: :number
+
+    = k.actions do
+      = k.submit "Oppdater tid"
+
+= link_to "Tilbake", sulten_admin_path
