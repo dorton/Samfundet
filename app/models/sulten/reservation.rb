@@ -22,8 +22,15 @@ class Sulten::Reservation < ActiveRecord::Base
   end
 
   def check_opening_hours
-    if not Sulten::Reservation.lyche_open?(self.reservation_from, self.reservation_to)
-      errors.add(:reservation_from, I18n.t("helpers.models.sulten.reservation.errors.reservation_from.check_opening_hours"))
+  #errors.add(:reservation_from, I18n.t("helpers.models.sulten.reservation.errors.reservation_from.check_opening_hours"))
+    if Sulten::ReservationType.find(reservation_type_id).needs_kitchen
+      if not Sulten::Reservation.kitchen_open?(self.reservation_from, self.reservation_to)
+        errors.add(:reservation_from, "Kjokkenet til Lyche er lukket under dette tidsrommet")
+      end
+    else
+      if not Sulten::Reservation.lyche_open?(self.reservation_from, self.reservation_to)
+        errors.add(:reservation_from, "Lyche er lukket under dette tidsrommet")
+      end
     end
   end
 
@@ -71,14 +78,40 @@ class Sulten::Reservation < ActiveRecord::Base
   end
 
   def self.lyche_open? from, to
-    #TODO: Change these defaults when admin can set them
-    #The values 16 .. 22 are the openinghours 
-    return (16..22).include?(from.hour..to.hour)
+    lycheIsOpeningHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0].hour
+    lycheIsOpeningMinute = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0].min
+    lycheIsClosingHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0].hour
+    lycheIsClosingMin = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0].min
+    if lycheIsOpeningHour == from.hour
+      return lycheIsOpeningMinute <= from.min
+    elsif lycheIsClosingHour == to.hour
+      return lycheIsClosingMin >= to.min
+    elsif (lycheIsOpeningHour..lycheIsClosingHour).include?(from.hour..to.hour)
+      return true
+    else
+      return false
+    end
   end
 
   def self.kitchen_open? from, to
-    default_kitchen_opening_hour = Time.new(2015,01,01,16,00,00)
-    default_kitchen_closing_hour = Time.new(2015,01,01,22,00,00)
-    return (16..22).include?(from.hour..to.hour)
+    kitchenOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0]
+    kitchenClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0]
+   # kitchenIsOpeningHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0].hour
+   # kitchenIsOpeningMinute = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0].min
+   # kitchenIsClosingHour = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0].hour
+   # kitchenIsClosingMin = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0].min
+
+    return (kitchenOpen.strftime( "%H%M%S" )..kitchenClose.strftime("%H%M%S")).include?(from.strftime( "%H%M%S" )..to.strftime( "%H%M%S" ))
+    
+
+   # if kitchenIsOpeningHour == from.hour
+   #   return kitchenIsOpeningMinute <= from.min
+   # elsif kitchenIsClosingHour == to.hour
+   #   return kitchenIsClosingMin >= to.min
+   # elsif (kitchenIsOpeningHour+1..kitchenIsClosingHour-1).include?(from.hour..to.hour)
+   #   return true
+   # else
+   #   return false
+   # end
   end
 end
