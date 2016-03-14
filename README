@@ -10,6 +10,7 @@ Use the [issue tracker](https://github.com/Samfundet/Samfundet/issues) to report
 ### Developing
 
 PRs are welcome. Follow these steps to set the website up locally:
+
 1. Install Ruby on Rails.
 2. Run ```make copy-config-files``` and choose a password for the samfdb_dev database in ```config/database.yml```.
 3. Install Postgres. Ubuntu example: ```sudo apt-get install libpq-dev```.
