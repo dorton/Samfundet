@@ -9,7 +9,7 @@ ruby '2.1.5'
 source 'https://rubygems.org'
 
 # Rails. Duh.
-gem 'rails', '3.2.22.1'
+gem 'rails', '3.2.22.2'
 
 # acts_as_list provides the means to sort and reorder a list of objects
 # with respect to a column in the database, e.g. to sort and reorder a list
