@@ -22,4 +22,4 @@ PRs are welcome. Follow these steps to set the website up locally:
 
 ## License
 
-MIT © [Studentersamfundet i Trondhjem](https://www.samfundet.no/)
+MIT © Samfundet.no project authors
