@@ -166,7 +166,7 @@ group :development do
 
   # Simple command execution over SSH. Lightweight deployment tool.
   # Using our own version until https://github.com/mina-deploy/mina/pull/361 is merged.
-  gem 'mina', git: "git@github.com:samfundet/mina.git"
+  gem 'mina', git: "git://github.com/Samfundet/mina.git"
 
   # A DSL for quickly creating web applications in Ruby with minimal effort.
   gem 'sinatra'
