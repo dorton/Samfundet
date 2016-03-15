@@ -180,7 +180,7 @@ end
 
 group :test do
   # Cucumber is a BDD testing framework.
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
 
   # database_cleaner ensures a clean DB state during tests;
   # we use it with Cucumber.

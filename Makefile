@@ -14,5 +14,9 @@ copy-config-files:
 	cp config/billig.example.yml config/billig.yml
 
 .PHONY:
+copy-travis-files:
+	cp config/database.travis.yml config/database.yml
+
+.PHONY:
 test:
 	bundle exec rubocop -R -D
