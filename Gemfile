@@ -153,10 +153,6 @@ group :development do
   # of our web pages for easy reference.
   gem 'rails-footnotes'
 
-  # RSpec is a unit testing framework.
-  # rspec-rails integrates RSpec (v2) and Rails (v3).
-  gem 'rspec-rails'
-
   # file listener for automatic refresh of webpage on file change
   gem 'guard-livereload', require: false
   # livereload injection via rack middleware, no need for browser extesions
@@ -176,6 +172,12 @@ group :development do
 
   # Generate diagrams of models and controllers. Usage: Install graphviz and run 'rake diagram:all'.
   gem 'railroady'
+end
+
+group :development, :test do
+  # RSpec is a unit testing framework.
+  # rspec-rails integrates RSpec (v2) and Rails (v3).
+  gem 'rspec-rails'
 end
 
 group :test do
@@ -198,6 +200,9 @@ group :test do
 
   # See above (:development)
   gem 'sqlite3'
+
+  # Factories for testing
+  gem 'factory_girl_rails'
 
   # webrat provides functions such as 'visit', 'click_link',
   # 'click_button', etc. for use in integration tests.
