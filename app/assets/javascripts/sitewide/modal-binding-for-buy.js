@@ -72,12 +72,7 @@ $(function() {
     openPurchaseModalBasedOnHash();
   });
 
-  var otherInputForId = {
-    '#cardnumber' : '#email',
-    '#email': '#cardnumber'
-  };
-
-  $(document).on('keyup blur', '.billig-buy input[type=text]',
+  $(document).on('keyup blur', '#cardnumber, #email, #email_confirmation',
       function clearOtherInputOnType() {
 
     // Only clear other form if we've written something
@@ -89,19 +84,26 @@ $(function() {
     $(id)
       .siblings('input:radio')
       .prop('checked', true);
-    $(otherInputForId[id]).val('');
+
+    if (id === '#cardnumber') {
+      $('#email, #email_confirmation').val('');
+    } else {
+      $('#cardnumber').val('');
+    }
   });
 
   $(document).on('focus', '.billig-buy input[type=radio]',
       function enforceRadioChoice() {
 
     // Clear selected and other input fields
-    var textfield = $(this).siblings('input[type=text]')
-      .val('')
-      .select();
+    var textfield = $(this).siblings('input[type=text], input[type=email]');
 
     var id = '#' + textfield.attr('id');
-    $(otherInputForId[id]).val('');
+    if (id === '#cardnumber') {
+      $('#email, #email_confirmation').val('');
+    } else {
+      $('#cardnumber').val('');
+    }
   });
 
   $(document).on('change', '.ticket-table select', function(e) {
@@ -125,10 +127,6 @@ $(function() {
   });
 
   $('.ticket-table select').change();
-
-  function validateEmailFormat(email) {
-    return email.match(/^[\w\.\d]+@[\w\.\d]+$/);
-  }
 
   function validateCardChecksum(value, pattern) {
     var sum = 0;
@@ -169,24 +167,21 @@ $(function() {
     var feedback = $('#email_feedback');
     var email1 = $('#email').val();
     var email2 = $('#email_confirmation').val();
-    var validEmail = validateEmailFormat(email1);
 
     var text = {
-        "no": ["Ikke gyldig epost", "Epostene er like", "Epostene er ikke like"],
-        "en": ["Not a valid email", "Emails are equal", "Emails are not equal"]
+        "no": ["Epostene er like", "Epostene er ikke like"],
+        "en": ["Emails are equal", "Emails are not equal"]
     }
-    
-    if (email1 === email2) {
-      if (validEmail) {
-        feedback.text(text[$('html').attr('lang')][1]);
-        feedback.attr('class', 'email_equal');
-        return true;
-      } else {
-        feedback.text(text[$('html').attr('lang')][0]);
+
+    if ($('#ticket_type_card').prop('checked')) {
+        feedback.text('');
         feedback.attr('class', '');
-      }
+    } else if (email1 === email2 && email1 != '') {
+      feedback.text(text[$('html').attr('lang')][0]);
+      feedback.attr('class', 'email_equal');
+      return true;
     } else {
-      feedback.text(text[$('html').attr('lang')][2]);
+      feedback.text(text[$('html').attr('lang')][1]);
       feedback.attr('class', 'email_error');
     }
   }
@@ -233,10 +228,13 @@ $(function() {
   function checkValidForm() {
     var input = $('#ccno');
     var info = getCardInformation(input.val());
+
+    var validEmail = validateEmail();
+
     if (info && info['type'] !== 'error' &&
         (!$('#ticket_type_paper').prop('checked') || 
-        validateEmail())) {
-      
+        validEmail)) {
+
       $('.billig-buy .custom-form [name="commit"]').prop('disabled', false);
     }
     else {
@@ -246,6 +244,5 @@ $(function() {
 
   $(document).on('focus keyup', '#ccno', cardEditingFeedback);
   $(document).on('blur', '#ccno', finalCardFeedback); 
-  $(document).on('blur focus keyup', '.billig-buy .custom-form input', checkValidForm); 
-  $(document).on('focus keyup', '#email, #email_confirmation', validateEmail);
+  $(document).on('blur focus keyup change', '.billig-buy .custom-form input', checkValidForm);
 });
