@@ -8,11 +8,11 @@ class JobsController < ApplicationController
     @similar_available_jobs = @job.similar_available_jobs
 
     # FIXME: Probably some role check is better.
-    if current_user.kind_of? Applicant
-      @job_application = @job.job_applications.find_or_initialize_by_applicant_id(current_user.id)
-    else
-      @job_application = JobApplication.new(job: @job)
-    end
+    @job_application = if current_user.kind_of? Applicant
+                         @job.job_applications.find_or_initialize_by_applicant_id(current_user.id)
+                       else
+                         JobApplication.new(job: @job)
+                       end
 
     @already_applied = !@job_application.new_record?
 
