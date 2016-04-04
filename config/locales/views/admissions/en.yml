@@ -15,7 +15,7 @@ en:
     deadline: "Deadline"
     edit_admission: "Edit admission"
     index_title: "Admissions at Samfundet"
-    group_information: "%{group_name} has a total of %{n_applications} applications to %{n_jobs} jobs. There is %{n_applicants} unique applicants."
+    group_information: "%{group_name} has a total of %{n_applications} applications to %{n_jobs} jobs from %{n_applicants} unique applicants."
     my_groups: "My groups"
     administer_my_group: Manage my groups admission
     name: "Name"

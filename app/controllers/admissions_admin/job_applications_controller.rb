@@ -16,7 +16,8 @@ class AdmissionsAdmin::JobApplicationsController < ApplicationController
         "Ringt, venter fremdeles på svar",
         "Ringt og tilbudt verv, takket ja",
         "Ringt og tilbudt verv, takket nei",
-        "Ringt og meddelt ingen tilbud om verv"
+        "Ringt og meddelt ingen tilbud om verv",
+        "Sendt e-post og meddelt ingen tilbud om verv"
       ]
     elsif I18n.locale == :en
       @possible_log_entries = [
@@ -25,7 +26,8 @@ class AdmissionsAdmin::JobApplicationsController < ApplicationController
         "Called, still waiting for reply",
         "Called and offered position, the applicant accepted",
         "Called and offered position, the applicant declined",
-        "Called and notified the applicant of our rejection"
+        "Called and notified the applicant of our rejection",
+        "Sent email and notified the applicant of our rejection"
       ]
     end
   end

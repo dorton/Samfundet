@@ -15,7 +15,7 @@
     deadline: "Frist"
     edit_admission: "Redigér opptak"
     index_title: "Opptak hos Samfundet"
-    group_information: "%{group_name} har %{n_applications} søknader på %{n_jobs} stillinger. Det er %{n_applicants} unike søkere."
+    group_information: "%{group_name} har %{n_applications} søknader fra %{n_applicants} unike søkere på %{n_jobs} stillinger."
     my_groups: "Mine gjenger"
     administer_my_group: Administrer min gjengs opptak
     name: "Navn"
