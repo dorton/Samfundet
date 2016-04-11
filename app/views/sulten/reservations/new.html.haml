@@ -1,4 +1,3 @@
-
 %h2= t("sulten.reservation.form.title")
 %p
   = t("sulten.reservation.form.intro1")
@@ -7,22 +6,41 @@
 %p
   = t("sulten.reservation.form.intro3")
   <a href="mailto:lyche@samfundet.no">Lyche.</a>
-= semantic_form_for @reservation do |f|
-  = f.inputs do
-    = f.input :people, label: t("sulten.reservation.people"),as: :number
-    %li
-      %p.inline-hints
-        = t("sulten.reservation.form.too_many")
-        = mail_to "lyche@samfundet.no", "mail."
-    = f.input :reservation_from, label: t("sulten.reservation.form.from"), input_html: { class: "datetimepicker_lyche"}, as: :string
-    = f.input :reservation_duration, label: t("sulten.reservation.form.duration"), collection: [30, 60, 90, 120], member_label: proc{|d| "#{d} minutter"}, include_blank: false
-    = f.input :name, label: t("sulten.reservation.name")
-    %li
-      %p.inline-hints
-        = t("sulten.reservation.form.type_explanation")
-    = f.input :reservation_type, label: t("sulten.reservation.reservation_type"), include_blank: false
-    = f.input :telephone, label: t("sulten.reservation.telephone")
-    = f.input :email, label: t("sulten.reservation.email")
-    = f.input :allergies, label: t("sulten.reservation.allergies")
-  = f.actions do
-    = f.submit t("sulten.reservation.form.create")
+
+%div{"ng-app"=>"reservation", "ng-controller"=>"ReservationCtrl"}
+  %form{:class=>"simple-form"}
+    %br
+      %p= t("sulten.reservation.people")
+      %input{:type=>"number", "ng-model"=>"reservation.people"}
+    %br
+      %p= t("sulten.reservation.name")
+      %input{:type=>"text", "ng-model"=>"reservation.name"}
+    %br
+      %select{"ng-model"=>"reservation.reservationTypeId", :name=>t("sulten.reservation.reservation_type")}
+        - @reservationTypes.each do |t|
+          %option{"value"=>t.id}
+            = t.name
+    %br
+      %p= t("sulten.reservation.telephone")
+      %input{:type=>"tel", "ng-model"=>"reservation.telephone"}
+    %br
+      %p= t("sulten.reservation.email")
+      %input{:type=>"email", "ng-model"=>"reservation.email"}
+    %br
+      %p= t("sulten.reservation.from")
+      %input{:class=>"datetimepicker_lyche", "ng-model"=>"reservation.reservationFrom", :label=> t("sulten.reservation.form.from")}
+    %br
+      %p= t("sulten.reservation.duration")
+      %select{"ng-model"=>"reservation.reservationDuration", :name=>t("sulten.reservation.form.duration")}
+        - [30,60,90,120].each do |t|
+          %option{"value"=>t}
+            = t
+    %br
+      %p= t("sulten.reservation.allergies")
+      %input{:type=>"text", "ng-model"=>"reservation.allergies"}
+    %br
+      Ledige tider:
+      %u1
+        %li{"ng-repeat"=>"period in available_periods"}
+          %button{"ng-click"=>"save(period)"}
+            {{period.substring(11,16)}}

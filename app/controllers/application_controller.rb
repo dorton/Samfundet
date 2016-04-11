@@ -10,9 +10,14 @@ class ApplicationController < ActionController::Base
   before_filter :store_location
   before_filter :set_locale
   before_filter :set_current_user_for_model_layer_access_control
+  after_filter :set_csrf_cookie_for_ng
 
   # Helper methods that are also used in controllers
   helper_method :current_user, :logged_in?
+
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+  end
 
   def handle_unverified_request
     raise ActionController::InvalidAuthenticityToken
@@ -91,5 +96,9 @@ class ApplicationController < ActionController::Base
 
   def redirect_back
     redirect_to session[:return_to]
+  end
+
+  def verified_request?
+    super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
   end
 end

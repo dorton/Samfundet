@@ -55,6 +55,8 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.4.0)
+    angularjs-rails (1.4.8)
+    angularjs-rails-resource (2.0.0)
     annotate (2.7.0)
       activerecord (>= 3.2, < 6.0)
       rake (~> 10.4)
@@ -336,6 +338,8 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  angularjs-rails
+  angularjs-rails-resource (~> 2.0.0)
   annotate
   bcrypt-ruby
   better_errors (~> 1.1)

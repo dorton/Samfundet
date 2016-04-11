@@ -13,6 +13,9 @@
 //= require jquery-ui/autocomplete
 //= require "jquery-tablesorter"
 //
+//= require angular
+//= require angularjs/rails/resource
+//
 // These are in vendor/assets/javascripts:
 //
 //= require "jquery-ui-timepicker-addon.min"
@@ -32,4 +35,5 @@
 //= require_tree "./site"
 //= require_tree "./areas"
 //= require_tree "./images"
+//= require_tree "./sulten"
 //= require cocoon

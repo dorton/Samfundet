@@ -10,19 +10,22 @@ class Sulten::ReservationsController < ApplicationController
   end
 
   def new
-    @reservation = Sulten::Reservation.new
+    @reservationTypes = Sulten::ReservationType.all
   end
 
   def create
     @reservation = Sulten::Reservation.new(params[:sulten_reservation])
-    if @reservation.save
-      SultenNotificationMailer.send_reservation_email(@reservation).deliver
-      flash[:success] = t("helpers.models.sulten.reservation.success.create")
-      redirect_to success_sulten_reservations_path
-    else
-      flash.now[:error] = t("helpers.models.sulten.reservation.errors.creation_fail")
-      render :new
+
+    respond_to do |format|
+      if @reservation.save
+        SultenNotificationMailer.send_reservation_email(@reservation).deliver
+        flash[:success] = t("helpers.models.sulten.reservation.success.create")
+        format.json { render :json => { :redirect => success_sulten_reservations_path } }
+      else
+        format.json { render :nothing => true }
+      end
     end
+
   end
 
   def show
@@ -53,5 +56,16 @@ class Sulten::ReservationsController < ApplicationController
   end
 
   def success
+  end
+
+  def available_periods
+    respond_to do |format|
+      first_period = Time.zone.parse(params[:from]).change(hour: 16)
+      last_period = Time.zone.parse(params[:from]).change(hour: 22) - params[:duration].to_i.minutes
+      periods = (first_period.to_i..last_period.to_i).step(30.minutes).map { |t| Time.zone.at(t).to_datetime }
+      periods.delete_if {|period| not Sulten::Reservation.find_table(period, period + params[:duration].to_i.minutes, params[:people].to_i, params[:reservation_type_id].to_i)}
+
+      format.json { render :json =>  periods}
+    end
   end
 end
