@@ -15,6 +15,7 @@
 //
 //= require angular
 //= require angularjs/rails/resource
+//= require angular-ui-router
 //
 // These are in vendor/assets/javascripts:
 //

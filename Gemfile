@@ -122,11 +122,12 @@ group :assets do
   gem 'neat'
   # uglifier is a Ruby wrapper for UglifyJS, a JavaScript compressor.
   gem 'uglifier'
-
   # Gem to include angular
   gem 'angularjs-rails'
   # Gem to make it easier to combine angular and rails
   gem 'angularjs-rails-resource', '~> 2.0.0'
+  # Used for creating angular modals
+  gem 'angular-ui-router-rails'
 end
 
 group :development do

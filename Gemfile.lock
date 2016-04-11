@@ -55,6 +55,7 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.4.0)
+    angular-ui-router-rails (0.2.15)
     angularjs-rails (1.4.8)
     angularjs-rails-resource (2.0.0)
     annotate (2.7.0)
@@ -338,6 +339,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  angular-ui-router-rails
   angularjs-rails
   angularjs-rails-resource (~> 2.0.0)
   annotate
@@ -395,6 +397,3 @@ DEPENDENCIES
   uglifier
   webrat
   will_paginate
-
-BUNDLED WITH
-   1.11.2

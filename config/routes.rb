@@ -183,6 +183,7 @@ Rails.application.routes.draw do
     get :kjempelars, to: "admin#index"
     get "reservations/archive" => "reservations#archive"
     get "reservations/available_periods" => "reservations#available_periods"
+    get "reservations/modal" => "reservations#modal"
 
     resources :reservation_types
     resources :reservations do

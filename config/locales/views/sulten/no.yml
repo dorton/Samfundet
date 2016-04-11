@@ -24,6 +24,9 @@
         from: "starttidspunkt:"
         duration: "varighet:"
         type_explanation: "hva er hovedmålet med besøket? vi bruker dette for å tildele et passende bord"
+        not_today: "Reservasjoner må gjøres senest dagen i forveien"
+        choose_time: "Velg klokkeslett"
+        no_available_periods: "Ingen ledige tidspunkt"
         create: "opprett reservasjon"
         update: "oppdater reservasjon"
       show:

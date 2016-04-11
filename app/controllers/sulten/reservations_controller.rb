@@ -10,7 +10,7 @@ class Sulten::ReservationsController < ApplicationController
   end
 
   def new
-    @reservationTypes = Sulten::ReservationType.all
+    @reservation = Sulten::Reservation.new
   end
 
   def create
@@ -20,9 +20,9 @@ class Sulten::ReservationsController < ApplicationController
       if @reservation.save
         SultenNotificationMailer.send_reservation_email(@reservation).deliver
         flash[:success] = t("helpers.models.sulten.reservation.success.create")
-        format.json { render :json => { :redirect => success_sulten_reservations_path } }
+        format.json { render :json => { :redirect => success_sulten_reservations_path, :status => 200 } }
       else
-        format.json { render :nothing => true }
+        format.json { render :json => { :errors => @reservation.errors, :status => 422 } }
       end
     end
 
@@ -67,5 +67,9 @@ class Sulten::ReservationsController < ApplicationController
 
       format.json { render :json =>  periods}
     end
+  end
+
+  def modal
+    render layout:false
   end
 end

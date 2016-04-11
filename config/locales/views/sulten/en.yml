@@ -24,6 +24,9 @@ en:
         from: "beginning time of reservation"
         duration: "duration"
         type_explanation: "what is the purpose of the visit? this helps determine the sort of table you will be given"
+        not_today: "Reservations must be made at least one day in advance"
+        choose_time: "Choose time of day"
+        no_available_periods: "No available times"
         create: "make reservation"
         update: "update reservation"
       show:

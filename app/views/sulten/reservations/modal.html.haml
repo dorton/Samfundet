@@ -1,0 +1,11 @@
+.Modal-backdrop
+.Modal-holder{:autoscroll => "false", "ui-view" => "modal"}
+  .Modal-box
+    %h3 Ledige tider:
+    %li{"ng-repeat" => "period in availablePeriods", :style => "width:auto;display:inline"}
+      %input{:name => "period", "ng-click" => "setPeriod(period)", :required => "required", :type => "radio"}/
+      {{period.substring(11,16)}}
+    %p{"ng-hide" => "availablePeriods.length"}
+      = t("sulten.reservation.form.no_available_periods")
+    %input{"ng-show" => "availablePeriods.length", :type => "submit", :value => t("sulten.reservation.form.create")}/
+    %input{:type => "button", "ui-sref" => "Default", :value => t("formtastic.cancel")}/
