@@ -20,3 +20,11 @@ copy-travis-files:
 .PHONY:
 test:
 	bundle exec rubocop -R -D
+
+.PHONY:
+deploy-production:
+	bundle exec mina deploy:production
+
+.PHONY:
+deploy-staging:
+	bundle exec mina deploy:staging
