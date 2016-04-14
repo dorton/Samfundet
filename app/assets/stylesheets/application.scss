@@ -6,6 +6,7 @@
 // Vendor stylesheets
 @import "jquery.modal";
 @import "jquery-ui-timepicker-addon.min";
+@import "_typeahead";
 
 // Scss and grid modules
 @import "bourbon";
@@ -33,7 +34,6 @@
 @import "sitewide/_flashes";
 @import "sitewide/_ribbon";
 @import "sitewide/_pagination";
-@import "sitewide/_typeahead";
 
 // Sass files for different modules
 @import "site/site.css.scss";
