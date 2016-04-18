@@ -85,14 +85,14 @@ class Sulten::Reservation < ActiveRecord::Base
   end
 
   def self.lyche_open? from, to
-    lycheOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openLyche)[0]
-    lycheClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeLyche)[0]
+    lycheOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:open_lyche)[0]
+    lycheClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:close_lyche)[0]
     return (lycheOpen.strftime( "%H%M%S" )..lycheClose.strftime("%H%M%S")).include?(from.strftime( "%H%M%S" )..to.strftime( "%H%M%S" ))
   end
 
   def self.kitchen_open? from, to
-    kitchenOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:openKitchen)[0]
-    kitchenClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:closeKitchen)[0]
+    kitchenOpen = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:open_kitchen)[0]
+    kitchenClose = Sulten::LycheOpeningHours.where(day_number: from.wday).pluck(:close_kitchen)[0]
     return (kitchenOpen.strftime( "%H%M%S" )..kitchenClose.strftime("%H%M%S")).include?(from.strftime( "%H%M%S" )..to.strftime( "%H%M%S" ))
 
   end

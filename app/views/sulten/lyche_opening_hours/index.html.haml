@@ -18,15 +18,15 @@
     %tr
       %td
         %h3
-          =@weekdays[f.day_number]
+          =Date::DAYNAMES[f.day_number]
       %td
-        = f.openLyche.strftime("%H:%M")
+        = f.open_lyche.strftime("%H:%M")
       %td
-        = f.openKitchen.strftime("%H:%M")
+        = f.open_kitchen.strftime("%H:%M")
       %td
-        = f.closeKitchen.strftime("%H:%M")
+        = f.close_kitchen.strftime("%H:%M")
       %td
-        = f.closeLyche.strftime("%H:%M")
+        = f.close_lyche.strftime("%H:%M")
       %td
         = link_to "Rediger", edit_sulten_lyche_opening_hour_path(f)
 

@@ -1,12 +1,10 @@
 class Sulten::LycheOpeningHoursController < ApplicationController
   def index
-    @lyche_opening_hours= Sulten::LycheOpeningHours.order(:id).all
-    @weekdays = ["Sondag","Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lordag"]
+    @lyche_opening_hours= Sulten::LycheOpeningHours.order.all
   end
 
   def edit
     @lyche_opening_hours= Sulten::LycheOpeningHours.find(params[:id])
-    @weekdays = ["Sondag","Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lordag"]
   end
 
   def update

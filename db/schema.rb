@@ -399,19 +399,19 @@ ActiveRecord::Schema.define(:version => 20160314224333) do
   add_index "standard_hours", ["day"], :name => "index_standard_hours_on_day"
 
   create_table "sulten_lyche_opening_hours", :force => true do |t|
-    t.time     "openLyche"
-    t.time     "closeLyche"
-    t.time     "openKitchen"
-    t.time     "closeKitchen"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.time     "open_lyche"
+    t.time     "close_lyche"
+    t.time     "open_kitchen"
+    t.time     "close_kitchen"
     t.integer  "day_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "sulten_reservation_types", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.text     "description"
     t.boolean  "needs_kitchen"
   end
