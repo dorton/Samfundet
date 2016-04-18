@@ -1,2 +1,0 @@
-module Sulten::LycheOpeningHoursHelper
-end
