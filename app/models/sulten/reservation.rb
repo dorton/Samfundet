@@ -48,14 +48,13 @@ class Sulten::Reservation < ActiveRecord::Base
   end
 
   def check_opening_hours
-  #errors.add(:reservation_from, I18n.t("helpers.models.sulten.reservation.errors.reservation_from.check_opening_hours"))
     if Sulten::ReservationType.find(reservation_type_id).needs_kitchen
       if not Sulten::Reservation.kitchen_open?(self.reservation_from, self.reservation_to)
-        errors.add(:reservation_from, "Kjokkenet til Lyche er lukket under dette tidsrommet")
+        errors.add(:reservation_from, I18n.t("helpers.models.sulten.reservation.errors.reservation_from.check_kitchen_opening_hours"))
       end
     else
       if not Sulten::Reservation.lyche_open?(self.reservation_from, self.reservation_to)
-        errors.add(:reservation_from, "Lyche er lukket under dette tidsrommet")
+        errors.add(:reservation_from, I18n.t("helpers.models.sulten.reservation.errors.reservation_from.check_lyche_opening_hours"))
       end
     end
   end
