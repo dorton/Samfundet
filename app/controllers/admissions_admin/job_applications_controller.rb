@@ -2,7 +2,7 @@
 class AdmissionsAdmin::JobApplicationsController < ApplicationController
   layout 'admissions'
   filter_access_to :show, attribute_check: true
-  
+
   def show
     @log_entries = LogEntry.find :all, conditions: {
       applicant_id: @job_application.applicant.id,
@@ -31,6 +31,7 @@ class AdmissionsAdmin::JobApplicationsController < ApplicationController
       ]
     end
   end
+
   def hidden_create
     applicant = Applicant.find_by_email(params[:email])
     if applicant.nil?

@@ -4,7 +4,7 @@ module ControlPanel
     def initialize(controller, action_name, options)
       @controller = controller
       @action_name = action_name
-      @condition_block  = options[:if] || -> { true }
+      @condition_block = options[:if] || -> { true }
     end
 
     def relevant?
@@ -30,7 +30,7 @@ module ControlPanel
 
     def has_control_panel_applet(*args)
       control_panel_applets << lambda do |request|
-        controller = self.new
+        controller = new
 
         # need to pass the current request to the controller for the applet,
         # otherwise link_to breaks and declarative_authorization misbehaves

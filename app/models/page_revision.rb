@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PageRevision < ActiveRecord::Base
-  CONTENT_TYPES = %w(html markdown)
+  CONTENT_TYPES = %w(html markdown).freeze
 
   validates_presence_of :page
   validates_inclusion_of :content_type, in: CONTENT_TYPES, message: "Invalid content type"
@@ -9,5 +9,4 @@ class PageRevision < ActiveRecord::Base
   belongs_to :member
 
   default_scope order(:version)
-
 end

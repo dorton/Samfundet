@@ -76,7 +76,7 @@ describe ApplicantsController do
     end
 
     describe "when a valid-looking phone number is entered" do
-      it "should not set flash[:notice]" do 
+      it "should not set flash[:notice]" do
         @applicant = mock_model(Applicant)
         @phone = mock("PhoneAttribute")
         @phone.stub(:match).and_return(true)
@@ -92,7 +92,7 @@ describe ApplicantsController do
     end
 
     describe "when an invalid-looking phone number is entered" do
-      it "should set flash[:notice]" do 
+      it "should set flash[:notice]" do
         @applicant = mock_model(Applicant)
         @phone = mock("PhoneAttribute")
         @phone.stub(:match).and_return(false)
@@ -159,7 +159,7 @@ describe ApplicantsController do
         @applicant.should_receive(:can_recover_password?).and_return(true)
         @applicant.stub(:create_recovery_hash).and_return('hash')
         PasswordRecovery.stub(:create!).and_return(false)
-        
+
         post :generate_forgot_password_email
       end
 
@@ -196,11 +196,11 @@ describe ApplicantsController do
       it "should redirect to forgot password" do
         response.should redirect_to forgot_password_path
       end
-    end   
+    end
 
     describe "success" do
       before(:each) do
-         @applicant = mock_model(Applicant)
+        @applicant = mock_model(Applicant)
         Applicant.should_receive(:find_by_email).at_least(:once).and_return(@applicant)
         @applicant.should_receive(:can_recover_password?).and_return(true)
         @applicant.should_receive(:create_recovery_hash).at_least(:once).and_return('hash')
@@ -273,7 +273,7 @@ describe ApplicantsController do
       it "should return applicant" do
         assigns(:applicant).should == @applicant
       end
-      
+
       it "should return the hash" do
         assigns(:hash).should == @hash
       end
@@ -327,7 +327,6 @@ describe ApplicantsController do
         PasswordRecovery.create!(applicant_id: @applicant.id)
 
         post :change_password, applicant: {}, id: @applicant.id
-
       end
 
       it "should delete all password_recoveries" do
@@ -344,15 +343,13 @@ describe ApplicantsController do
     end
   end
 
-
-  describe :steal_identity do 
+  describe :steal_identity do
     it "should set the session value applicant_id to the id of the applicant having the email specified and redirect to home page" do
-	applicant = mock_model(Applicant).as_null_object
-        Applicant.stub(:find_by_email).with("test@example.com").and_return(applicant)
-	post :steal_identity, applicant_email: "test@example.com"
-        session[:applicant_id].should == applicant.id
-        response.should redirect_to(root_path)
+      applicant = mock_model(Applicant).as_null_object
+      Applicant.stub(:find_by_email).with("test@example.com").and_return(applicant)
+      post :steal_identity, applicant_email: "test@example.com"
+      session[:applicant_id].should == applicant.id
+      response.should redirect_to(root_path)
     end
   end
-
 end

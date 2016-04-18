@@ -24,7 +24,7 @@ class Job < ActiveRecord::Base
 
   def similar_available_jobs
     jobs = Job.where("admission_id IN (?) AND id IN (SELECT DISTINCT job_id FROM job_tags_jobs WHERE job_tag_id IN (?))", appliable_admission_ids, tags.collect(&:id))
-    
+
     # Remove self from similar jobs
     jobs - [self]
   end
@@ -40,32 +40,32 @@ class Job < ActiveRecord::Base
   def <=>(other)
     title <=> other.title
   end
-  
+
   # Virtual tags attribute
   def tag_titles=(titles)
-    old_tags = self.tags
+    old_tags = tags
     new_tags = titles.split(/[,\s]+/).map { |title| JobTag.find_or_create_by_title(title) }
-    tags.delete (self.tags - old_tags)
+    tags.delete(tags - old_tags)
     self.tags = new_tags
   end
+
   def tag_titles
     tags.map(&:title).join(", ")
   end
-  
+
   def job_applications_with_interviews
     job_applications.select { |j| j.interview && j.interview.time }
   end
-  
+
   def job_applications_without_interviews
     job_applications - job_applications_with_interviews
   end
-  
+
   private
 
   def appliable_admission_ids
     Admission.appliable.collect(&:id)
   end
-  
 end
 
 # == Schema Information
@@ -88,4 +88,3 @@ end
 #  default_motivation_text_no :text
 #  default_motivation_text_en :text
 #
-

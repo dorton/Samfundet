@@ -8,7 +8,7 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-   
+
     when /the home\s?page/
       '/'
     when /the login page/
@@ -59,14 +59,14 @@ module NavigationHelpers
       firstname, surname = $1.split(" ")
       a = Applicant.find_by_firstname_and_surname(firstname, surname)
       job_application = JobApplication.find_by_applicant_id_and_job_id(a.id, Job.find_by_title_no($2).id)
-      
+
       job = job_application.job
       group = job.group
       admission = job.admission
       admissions_admin_admission_group_job_job_application_path(admission, group, job, job_application)
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-        "Now, go and add a mapping in #{__FILE__}"
+            "Now, go and add a mapping in #{__FILE__}"
     end
   end
 end

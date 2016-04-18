@@ -35,21 +35,18 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    begin
-      if session[:member_id]
-        @current_user ||= Member.find(session[:member_id])
-      elsif session[:applicant_id]
-        @current_user ||= Applicant.find(session[:applicant_id])
-      end
-    rescue
-      @current_user = nil
+    if session[:member_id]
+      @current_user ||= Member.find(session[:member_id])
+    elsif session[:applicant_id]
+      @current_user ||= Applicant.find(session[:applicant_id])
     end
+  rescue
+    @current_user = nil
   end
 
   def logged_in?
     !current_user.nil?
   end
-
 
   def permission_denied
     if request.xhr?
@@ -82,11 +79,9 @@ class ApplicationController < ActionController::Base
       redirect_to path
     end
   end
-  
+
   def request_referer_if_on_current_domain
-    if request.referer && request.referer.include?(request.host)
-      request.referer
-    end
+    request.referer if request.referer && request.referer.include?(request.host)
   end
 
   def redirect_back

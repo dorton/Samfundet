@@ -6,51 +6,52 @@ class FrontPageLock < ActiveRecord::Base
 
   attr_accessible :lockable_id, :lockable_type, :position, :event_id, :blog_id
   attr_accessor :event_id, :blog_id
-  
+
   validate :check_if_already_locked, on: :update, if: :lockable_type?
   validates :position, presence: true, uniqueness: true
   validates :lockable_id, uniqueness: true, presence: true, if: :lockable_id?
   validates_inclusion_of :lockable_type,
-    in: [Event.name, Blog.name],
-    message: "Invalid lock type",
-    if: :lockable_type?
+                         in: [Event.name, Blog.name],
+                         message: "Invalid lock type",
+                         if: :lockable_type?
 
   scope :locks_enabled, -> {
     where('lockable_id IS NOT null')
-    .order(:position)}
+      .order(:position)
+  }
 
   # TODO: this might not be an issue in rails 3
   # belongs_to touch: true does not currently touch the old associated
   # object when the foreign key is the value that changes.
   # See rails issue #10197 and friends
-  #before_save :update_old_association
-  #def update_old_association
+  # before_save :update_old_association
+  # def update_old_association
   #  if lockable_changed? && lockable_was.present?
   #    lockable_was.touch
   #  end
-  #end
+  # end
 
   def to_param
     position
   end
 
   def event_or_blog_exists
-    return !lockable_type.constantize.find_by_id(lockable_id).nil?
+    !lockable_type.constantize.find_by_id(lockable_id).nil?
   end
 
   def event_or_blog_locked
-    return !lockable_type.constantize.find_by_id(lockable_id).front_page_lock.nil?
+    !lockable_type.constantize.find_by_id(lockable_id).front_page_lock.nil?
   end
 
   def check_if_already_locked
-    if not event_or_blog_exists
+    if !event_or_blog_exists
       if lockable_type == "Event"
         errors.add(:event_id, I18n.t("activerecord.models.front_page_lock.event_empty_choice_error"))
       else
         errors.add(:blog_id, I18n.t("activerecord.models.front_page_lock.blog_empty_choice_error"))
       end
       return
-    
+
     elsif event_or_blog_locked
       if lockable_type == "Event"
         errors.add(:event_id, I18n.t("activerecord.models.front_page_lock.event_already_locked_error"))
@@ -59,7 +60,6 @@ class FrontPageLock < ActiveRecord::Base
       end
     end
   end
-  
 end
 # == Schema Information
 #

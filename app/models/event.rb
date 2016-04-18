@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Event < ActiveRecord::Base
-  AGE_LIMIT = %w(eighteen eighteen_twenty twenty none)
+  AGE_LIMIT = %w(eighteen eighteen_twenty twenty none).freeze
   EVENT_TYPE = %w(art concert course dj excenteraften football_match happening
                   luka_event meeting movie music performance quiz
-                  samfundet_meeting party_meeting show theater theme_party uka_event)
-  STATUS = %w(active archived canceled)
-  PRICE_TYPE = %w(included custom billig free)
-  BANNER_ALIGNMENT = %w(left right hide)
+                  samfundet_meeting party_meeting show theater theme_party uka_event).freeze
+  STATUS = %w(active archived canceled).freeze
+  PRICE_TYPE = %w(included custom billig free).freeze
+  BANNER_ALIGNMENT = %w(left right hide).freeze
 
   TICKETS_UNAVAILABLE = :tickets_unavailable
   TICKETS_AVAILABLE = :tickets_available
@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
                   :short_description_en, :short_description_no, :duration,
                   :long_description_en, :long_description_no, :publication_time,
                   :spotify_uri, :facebook_link, :youtube_link, :youtube_embed, :spotify_link,
-                  :soundcloud_link, :instagram_link, :twitter_link, :lastfm_link, 
+                  :soundcloud_link, :instagram_link, :twitter_link, :lastfm_link,
                   :snapchat_link, :vimeo_link, :general_link, :event_type, :status,
                   :primary_color, :secondary_color, :image_id,
                   :price_groups, :price_type, :banner_alignment, :price_groups_attributes
@@ -53,23 +53,24 @@ class Event < ActiveRecord::Base
 
   before_save :enforce_price_choice
 
-  scope :active, -> { where(status: 'active')}
+  scope :active, -> { where(status: 'active') }
   scope :published, -> { where("publication_time < ?", DateTime.current) }
   scope :upcoming, -> { where("non_billig_start_time >= ?", Date.current) }
   scope :past, -> { where("non_billig_start_time < ?", Date.current) }
   scope :today, -> {
     active
-    .published
-    .where(
-      non_billig_start_time:
-        (DateTime.current - 4.hours).change(hour: 4)..20.hours.from_now.change(hour: 4))
-    .order(:non_billig_start_time)
+      .published
+      .where(
+        non_billig_start_time:
+          (DateTime.current - 4.hours).change(hour: 4)..20.hours.from_now.change(hour: 4))
+      .order(:non_billig_start_time)
   }
   scope :by_frontpage_weight, -> {
     active
-    .published
-    .upcoming
-    .sort{|a,b| b.front_page_weight <=> a.front_page_weight }}
+      .published
+      .upcoming
+      .sort { |a, b| b.front_page_weight <=> a.front_page_weight }
+  }
 
   def title_no
     billig_event.try(:event_name) || non_billig_title_no
@@ -80,7 +81,7 @@ class Event < ActiveRecord::Base
   end
 
   def end_time
-    self.start_time + self.duration.minutes
+    start_time + duration.minutes
   end
 
   def area_title
@@ -89,18 +90,18 @@ class Event < ActiveRecord::Base
 
   include PgSearch
   pg_search_scope :search,
-    against: [:non_billig_title_no, :title_en,
-              :short_description_no, :short_description_en,
-              :long_description_no, :long_description_en,
-              :age_limit, :non_billig_start_time,
-              :event_type],
-    using: {
-      tsearch: {
-        dictionary: "english",
-        prefix: true
-      }
-    },
-    associated_against: { area: :name }
+                  against: [:non_billig_title_no, :title_en,
+                            :short_description_no, :short_description_en,
+                            :long_description_no, :long_description_en,
+                            :age_limit, :non_billig_start_time,
+                            :event_type],
+                  using: {
+                    tsearch: {
+                      dictionary: "english",
+                      prefix: true
+                    }
+                  },
+                  associated_against: { area: :name }
 
   # Uses the above defined PgSearch scope to perform search.
   def self.text_search query
@@ -124,7 +125,7 @@ class Event < ActiveRecord::Base
   end
 
   def purchase_status
-    return TICKETS_UNAVAILABLE if (billig_event.nil? || Rails.application.config.billig_offline)
+    return TICKETS_UNAVAILABLE if billig_event.nil? || Rails.application.config.billig_offline
 
     within_sale_period =
       DateTime.current.between?(billig_event.sale_from, billig_event.sale_to)
@@ -148,12 +149,12 @@ class Event < ActiveRecord::Base
   # the frontpage based on time until the event, the event type and
   # the area for the event.
   def front_page_weight
-    weight = 50-4*((start_time - Time.current) / 1.day).to_i
+    weight = 50 - 4 * ((start_time - Time.current) / 1.day).to_i
 
     case event_type
     when "concert"
       weight += 7
-    when "theme_party" 
+    when "theme_party"
       weight += 9
     when "football_match", "dj", "quiz"
       weight += -4*60 # two month's worth of ban
@@ -161,16 +162,11 @@ class Event < ActiveRecord::Base
       weight += 0
     end
 
-    case area.name
-    when "Storsalen"
-      weight += 6
-    else
-      weight += 0
-    end
+    weight += 6 if area.name == "Storsalen"
 
     case purchase_status
     when TICKETS_SOLD_OUT
-      weight += -4*30 # one month's worth of ban
+      weight += -4 * 30 # one month's worth of ban
     end
 
     case few_tickets_left?
@@ -178,7 +174,7 @@ class Event < ActiveRecord::Base
       weight += 3
     end
 
-    return weight
+    weight
   end
 
   def to_param
@@ -212,15 +208,15 @@ class Event < ActiveRecord::Base
 
   def self.front_page_events n_front_page_events
     locks = FrontPageLock.locks_enabled
-    locks_map = Hash[locks.map {|l| [l.position, l.lockable]}]
+    locks_map = Hash[locks.map { |l| [l.position, l.lockable] }]
 
     events = Event.active
-    .published
-    .upcoming
-    .includes(:area)
-    .sort_by(&:front_page_weight)
-    .reverse
-    .take(n_front_page_events)
+                  .published
+                  .upcoming
+                  .includes(:area)
+                  .sort_by(&:front_page_weight)
+                  .reverse
+                  .take(n_front_page_events)
 
     front_page_events = []
     (0..n_front_page_events).map do |position|
@@ -240,14 +236,14 @@ class Event < ActiveRecord::Base
   def enforce_price_choice
     case price_type
     when 'included'
-      self.price_groups.clear
+      price_groups.clear
       self.billig_event = nil
     when 'custom'
       self.billig_event = nil
     when 'billig'
-      self.price_groups.clear
+      price_groups.clear
     when 'free'
-      self.price_groups.clear
+      price_groups.clear
       self.billig_event = nil
     end
   end
@@ -272,7 +268,6 @@ class Event < ActiveRecord::Base
       .flatten
       .uniq(&:price)
   end
-
 end
 
 # == Schema Information
@@ -296,4 +291,3 @@ end
 #  event_type        :string(255)
 #  status            :string(255)
 #
-

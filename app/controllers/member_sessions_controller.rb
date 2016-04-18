@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class MemberSessionsController < UserSessionsController
-
   def new
     @redirect_to = params[:redirect_to]
     @member_login_id = params[:member_login_id]
@@ -14,7 +13,7 @@ class MemberSessionsController < UserSessionsController
       redirect_after_login root_path
     else
       flash.now[:error] = t("sessions.login_error")
-      
+
       @member_login_id = params[:member_login_id]
       @redirect_to = params[:redirect_to]
       render :new

@@ -13,7 +13,7 @@ class GroupType < ActiveRecord::Base
   end
 
   def to_s
-    self.description
+    description
   end
 end
 
@@ -28,4 +28,3 @@ end
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-

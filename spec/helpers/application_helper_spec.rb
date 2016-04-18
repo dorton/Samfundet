@@ -43,9 +43,9 @@ describe ApplicationHelper, "when using html-helpers" do
         flash[name] = "message"
 
         helper.display_flash.should have_content("message")
-        helper.display_flash.should have_selector(".flash-#{name.to_s}")
+        helper.display_flash.should have_selector(".flash-#{name}")
 
-        flash[name]= nil
+        flash[name] = nil
       end
     end
   end

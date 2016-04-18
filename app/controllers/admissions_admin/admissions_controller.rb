@@ -2,17 +2,17 @@
 class AdmissionsAdmin::AdmissionsController < ApplicationController
   layout 'admissions'
   filter_access_to [:show, :statistics]
-  
+
   def show
     @admission = Admission.find(params[:id])
     @my_groups = current_user.my_groups
     @job_application = JobApplication.new
-    
+
     if @my_groups.length == 1
       redirect_to admissions_admin_admission_group_path(@admission, @my_groups.first)
     end
   end
-  
+
   def statistics
     @admission = Admission.find(params[:id])
 
@@ -31,7 +31,7 @@ class AdmissionsAdmin::AdmissionsController < ApplicationController
                                         day).count
     end
     admission_day_labels = (admission_start..admission_end).map do |day|
-     day.strftime("%-d.%-m")
+      day.strftime("%-d.%-m")
     end
 
     # The Gchart methods return an external URL to an image of the chart.
@@ -40,17 +40,17 @@ class AdmissionsAdmin::AdmissionsController < ApplicationController
       encoding: 'text',
       labels: group_labels,
       size: '800x300',
-      custom: 'chco=00FFFF,FF0000,FFFF00,0000FF',  # color scale
+      custom: 'chco=00FFFF,FF0000,FFFF00,0000FF', # color scale
     )
 
     @applications_per_day_chart = Gchart.bar(
       data: applications_per_day,
       encoding: 'text',
       labels: admission_day_labels,
-      axis_with_labels: ['x' ,'y'],
+      axis_with_labels: %w(x y),
       axis_range: [nil, [0, applications_per_day.max, 10]],
       size: '800x350',
-      bar_color: 'A03033',
+      bar_color: 'A03033'
     )
   end
 end

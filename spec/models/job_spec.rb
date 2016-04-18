@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe Job do
   before(:each) do
-      @open_admission   = create_open_admission
-      @closed_admission = create_closed_admission
+    @open_admission = create_open_admission
+    @closed_admission = create_closed_admission
   end
 
   it_should_validate_presence_of :title_no, :description_no, :group
@@ -19,7 +19,7 @@ describe Job do
 
     Job.all.collect(&:title).should == titles.sort
   end
-  
+
   context "language" do
     before(:each) do
       @job = Job.create(
@@ -58,7 +58,7 @@ describe Job do
         end
       end
     end
-    
+
     context "with :en locale" do
       before(:each) do
         I18n.should_receive(:locale).at_least(:once).and_return(:en)
@@ -148,7 +148,7 @@ describe Job do
     end
 
     it "should not return jobs in closed admissions" do
-      @layoutfrik  = @group.jobs.create!(admission: @closed_admission, title_no: "Layoutfrik", teaser_no: "Yay", description_no: "Ough")
+      @layoutfrik = @group.jobs.create!(admission: @closed_admission, title_no: "Layoutfrik", teaser_no: "Yay", description_no: "Ough")
       @webutvikler.available_jobs_in_same_group.should_not include(@layoutfrik)
     end
 
@@ -159,7 +159,7 @@ describe Job do
 
   describe :similar_available_jobs do
     before(:each) do
-      @lim    = Group.create!(group_type: stub_model(GroupType), name: "Layout Info Marked")
+      @lim = Group.create!(group_type: stub_model(GroupType), name: "Layout Info Marked")
       @webutvikler = @lim.jobs.create!(admission: @open_admission, title_no: "Webutvikler", teaser_no: "Yay", description_no: "Whatever",
                                        tags: [JobTag.find_or_create_by_title("utvikling")])
     end

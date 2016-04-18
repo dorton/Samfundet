@@ -2,14 +2,13 @@
 require 'spec_helper'
 
 describe ApplicationController do
-
   context :authorization do
     before(:each) do
-        @member = mock_model(Member)
-        Member.stub(:find).with(@member.id).and_return(@member)
+      @member = mock_model(Member)
+      Member.stub(:find).with(@member.id).and_return(@member)
 
-        @applicant = mock_model(Applicant)
-        Applicant.stub(:find).with(@applicant.id).and_return(@applicant)
+      @applicant = mock_model(Applicant)
+      Applicant.stub(:find).with(@applicant.id).and_return(@applicant)
     end
 
     describe :current_user do

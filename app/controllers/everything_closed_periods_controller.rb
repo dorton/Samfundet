@@ -1,5 +1,5 @@
 class EverythingClosedPeriodsController < ApplicationController
-  filter_access_to :all 
+  filter_access_to :all
 
   def index
     @current_and_future_closed_times = EverythingClosedPeriod.current_and_future_closed_times
@@ -8,7 +8,7 @@ class EverythingClosedPeriodsController < ApplicationController
   def new
     @everything_closed_period = EverythingClosedPeriod.new(
       closed_from: DateTime.current,
-      closed_to: DateTime.current + 1.weeks)
+      closed_to: DateTime.current + 1.week)
   end
 
   def create
@@ -43,5 +43,4 @@ class EverythingClosedPeriodsController < ApplicationController
     flash[:success] = I18n.t('everything_closed_periods.destruction')
     redirect_to everything_closed_periods_path
   end
-  
 end

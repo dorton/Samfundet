@@ -24,9 +24,9 @@ end
 
 Given /^there is a job titled "([^\"]*)" in the group "([^\"]*)" tagged "([^\"]*)"$/ do |job_title, group_name, tags|
   step "there are jobs \"#{job_title}\" for an admission \"Sample Admission\" for the group \"#{group_name}\""
-  
+
   without_access_control do
-  job = Job.find_by_title_no!(job_title)
+    job = Job.find_by_title_no!(job_title)
     tags.split.each do |tag|
       job.tags << JobTag.find_or_create_by_title(tag)
     end
@@ -40,7 +40,6 @@ Given /^"([^\"]*)" is an officer position$/ do |job_title|
     job.save!
   end
 end
-
 
 Given /^there are jobs (.+) for an admission "([^"]+)" for the group "([^"]+)"$/ do |jobs, admission_title, group_name|
   without_access_control do
@@ -58,7 +57,7 @@ Given /^there are jobs (.+) for an admission "([^"]+)" for the group "([^"]+)"$/
                                   admin_priority_deadline: 2.weeks.from_now + 1.hour)
 
     jobs.split(", ").each do |quoted_title|
-      title = quoted_title.gsub(/"/, "")
+      title = quoted_title.delete('"')
 
       Job.create!(
         admission: admission,
