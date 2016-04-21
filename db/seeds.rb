@@ -489,10 +489,10 @@ end
 #Create sulten reservations
 #
 for x in 1..6
-  Sulten::LycheOpeningHours.create(open_lyche: "2000-01-01 16:00:00", close_lyche: "2000-01-01 16:00:00", open_kitchen: "2000-01-01 16:00:00", close_kitchen: "2000-01-01 16:00:00",day_number: x)
+  Sulten::LycheOpeningHours.create(open_lyche: "2000-01-01 16:00:00", close_lyche: "2000-01-01 22:00:00", open_kitchen: "2000-01-01 16:00:00", close_kitchen: "2000-01-01 22:00:00",day_number: x)
 end
 #Add sunday as last entry
-Sulten::LycheOpeningHours.create(open_lyche: "2000-01-01 16:00:00", close_lyche: "2000-01-01 16:00:00", open_kitchen: "2000-01-01 16:00:00", close_kitchen: "2000-01-01 16:00:00",day_number: 0)
+Sulten::LycheOpeningHours.create(open_lyche: "2000-01-01 16:00:00", close_lyche: "2000-01-01 22:00:00", open_kitchen: "2000-01-01 16:00:00", close_kitchen: "2000-01-01 22:00:00",day_number: 0)
 
 type1 = Sulten::ReservationType.create(name: "Drikke", description: "Bord bare for drikke")
 type2 = Sulten::ReservationType.create(name: "Mat/drikke", description: "Bord bare for mat og drikke")
