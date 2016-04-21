@@ -6,7 +6,7 @@
 
 - content_for :banner_image do
   - if permitted_to? :manage, :front_page_locks
-    - if @banner_event.front_page_lock
+    - if @banner_event.try(:front_page_lock)
       = link_to edit_front_page_lock_path(@banner_event.front_page_lock), id: 'banner-image-edit' do
         = t('site.index.change_banner_lock')
     - else
