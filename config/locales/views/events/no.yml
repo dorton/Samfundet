@@ -27,6 +27,11 @@
     add_price_group: Legg til prisgruppe
     remove_price_group: Slett denne prisgruppen
 
+    age_limit: Aldersgrense
+    area: Lokale
+    organizer: Arrangør
+    ticket: Billett
+
     concert: Konsert
     quiz: Quiz
     theater: Teater
