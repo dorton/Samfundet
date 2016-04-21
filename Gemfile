@@ -196,9 +196,6 @@ group :test do
   # The RSpec testing framework.
   gem 'rspec'
 
-  # See above (:development)
-  gem 'sqlite3'
-
   # webrat provides functions such as 'visit', 'click_link',
   # 'click_button', etc. for use in integration tests.
   gem 'webrat'
