@@ -1,6 +1,6 @@
 class Sulten::LycheOpeningHoursController < ApplicationController
   def index
-    @lyche_opening_hours= Sulten::LycheOpeningHours.order.all
+    @lyche_opening_hours= Sulten::LycheOpeningHours.order('id').all
   end
 
   def edit
