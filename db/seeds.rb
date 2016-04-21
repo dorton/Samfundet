@@ -321,7 +321,7 @@ Area.all.each do |area|
       start_time =
         (rand 2).weeks.from_now +
         (rand 4).days +
-        (rand 5.hours)
+        (rand 5.hours.to_i)
       publication_time = 1.weeks.ago + (rand 10).days
 
       price_t = price_type.sample
@@ -430,7 +430,7 @@ possible_payment_errors.each do |error_message|
 
   BilligPaymentError.create!(
     error: bsession,
-    failed: rand(1.years).ago,
+    failed: rand(1.years.to_i).ago,
     owner_cardno: on_card ? rand(10000..999999) : nil,
     owner_email: on_card ? nil : Faker::Internet.email,
     message: error_message
