@@ -33,6 +33,16 @@ class EventsController < ApplicationController
     @events = Event
               .active
               .published
+              .upcoming
+              .text_search(params[:search])
+
+    render '_search_results', layout: false if request.xhr?
+  end
+
+  def archive_search
+    @events = Event
+              .active
+              .published
               .text_search(params[:search])
 
     render '_search_results', layout: false if request.xhr?
