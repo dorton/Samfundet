@@ -28,3 +28,4 @@ en:
     type_explanation_html: "This is an indication of how much work this job amounts to. A <strong>gjengmedlem</strong> is expected to work 10 hours a week, while a <strong>funksjonær</strong> is expected to work 20 hours a week. In comparison, funksjonærer have more benefictions than gjengmedlemmer."
     download_ical: "iCalendar file"
     belongs_to_closed_admission: "This job belongs to a closed admission, i.e. an admission that is either old or not yet open."
+    similar_jobs_not_applied_to: "Similar jobs you havent applied to"

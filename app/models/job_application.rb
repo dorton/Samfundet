@@ -14,8 +14,6 @@ class JobApplication < ActiveRecord::Base
   delegate :title, to: :job
 
   # named_scope :with_interviews, { conditions: ['interview.time > 0'] }
-  scope :withdrawn, where(withdrawn: true)
-  scope :not_withdrawn, where(withdrawn: false)
 
   # scope_condition for acts_as_list
   def scope_condition
