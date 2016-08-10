@@ -207,4 +207,7 @@ group :test do
   # webrat provides functions such as 'visit', 'click_link',
   # 'click_button', etc. for use in integration tests.
   gem 'webrat'
+
+  # Simplecov is a code coverage tool
+  gem 'simplecov', require: false
 end
