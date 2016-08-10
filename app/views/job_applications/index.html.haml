@@ -45,6 +45,15 @@
                 = job_application.find_or_create_interview.try(:time) || t('jobs.not_set')
               %td
                 = job_application.find_or_create_interview.try(:location) || t('jobs.not_set')
+      - if admission.appliable? && @current_user.similar_jobs_not_applied_to.any?
+        %h3= t('jobs.similar_jobs_not_applied_to')
+        %ul
+          - @current_user.similar_jobs_not_applied_to.each do |similar_job|
+            %li
+              = link_to job_path(similar_job) do
+                = similar_job.title
+              hos
+              = group_link similar_job.group
   %p
     = link_to admissions_path do
       = "« #{T('admissions.back_to_overview')}"

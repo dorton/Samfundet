@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class Applicant < ActiveRecord::Base
-  has_many :job_applications, order: 'priority', dependent: :destroy
+  has_many :job_applications, order: 'priority', dependent: :destroy, conditions: { withdrawn: false }
   has_many :jobs, through: :job_applications
   has_many :password_recoveries
   has_many :log_entries
@@ -44,6 +44,11 @@ class Applicant < ActiveRecord::Base
     job_applications.joins(:interview)
                     .where(interviews: { acceptance_status: %w(wanted reserved) })
                     .find { |application| application.job.admission == admission }
+  end
+
+  def similar_jobs_not_applied_to
+    similar_jobs = Set.new jobs.map(&:similar_available_jobs).flatten
+    similar_jobs - jobs
   end
 
   # Static because an applicant should be separated from the rest of the system
