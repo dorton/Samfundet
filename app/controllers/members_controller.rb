@@ -9,8 +9,8 @@ class MembersController < ApplicationController
                            if: -> { true }
 
   def search
-    @members = Member.where("UPPER(fornavn) || ' ' || UPPER(etternavn) LIKE ?" +
-                            " OR UPPER(mail) LIKE ? OR medlem_id = ?",
+    @members = Member.where("UPPER(fornavn) || ' ' || UPPER(etternavn) LIKE UPPER(?)" +
+                            " OR UPPER(mail) LIKE UPPER(?) OR medlem_id = ?",
                             "%#{params[:term].upcase}%",
                             "%#{params[:term].upcase}%",
                             params[:term].to_i)
