@@ -36,8 +36,8 @@
         %th
           = t('interviews.latest_log_entry')
 
-      - job_application_groupings.each do |job_applications|
-        %tbody
+      %tbody
+        - job_application_groupings.each do |job_applications|
           - job_applications.each do |job_application|
             %tr{id: "application-#{job_application.id}", class: job_application.assignment_status }
               %td
