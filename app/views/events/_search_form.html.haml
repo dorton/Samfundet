@@ -1,3 +1,4 @@
+- post_path = search_events_path if local_assigns[:post_path].nil?
 = form_tag post_path, method: :get, class: 'custom-form search-form', autocomplete: 'off' do
   = search_field_tag 'search', nil, placeholder: t('events.search.title')
   = select_tag 'event_type', options_for_select(Event::EVENT_TYPE.map { |k| [t("events.#{k}"), k] }.sort_by &:first), prompt: t('events.search.type'), class: 'search-constraints'
