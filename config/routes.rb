@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'contact', to: 'contact#index'
   post 'contact', to: 'contact#create'
+  get 'live', to: 'live#live' 
 
   get 'search', to: 'search#search'
   #resources :search, only: [:new, :create, :search]
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
       get 'purchase_callback', to: :purchase_callback_failure
       get 'purchase_callback/:tickets', to: :purchase_callback_success
     end
-  end 
+  end
 
   resources :front_page_locks, only: [:edit, :update] do
     post :clear, on: :member

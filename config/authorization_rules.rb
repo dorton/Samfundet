@@ -36,6 +36,8 @@ authorization do
     has_permission_on :events, to: [:read, :buy, :ical, :archive, :archive_search]
 
     has_permission_on :sulten_reservations, to: [:create, :success]
+
+    has_permission_on :live, to: :live
   end
 
   role :medlem do
