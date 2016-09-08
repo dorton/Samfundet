@@ -222,9 +222,11 @@ Page.create!(
   name_no: Page::MENU_NAME,
   name_en: Page::MENU_NAME,
   content_no: "- **Generelt**\n"\
+              "\t- [Saksdokumenter](/saksdokumenter)\n"\
               "\t- **Gjenger**\n#{Group.all.map { |p| "\t\t- [#{p.page.title_no}](/informasjon/#{p.page.name_no})" }.join("\n")}\n"\
               "\t- **Lokaler**\n#{Area.all.map { |p|  "\t\t- [#{p.page.title_no}](/informasjon/#{p.page.name_no})" }.join("\n")}\n",
   content_en: "- **General**\n"\
+              "\t- [Documents](/dokuments)\n"\
               "\t- **Groups**\n#{Group.all.map { |p| "\t\t- [#{p.page.title_en}](/informasjon/#{p.page.name_en})" }.join("\n")}\n"\
               "\t- **Areas**\n#{Area.all.map { |p|  "\t\t- [#{p.page.title_en}](/informasjon/#{p.page.name_en})" }.join("\n")}\n",
   role_id: Role.super_user.id
@@ -478,6 +480,22 @@ puts "Creating document categories"
     title_no: title_no,
     title_en: title_en,
   )
+end
+
+puts "Creating documents"
+DocumentCategory.all.each do |category|
+    100.times do
+        member = Member.order("RANDOM()").first
+        file = File.open(Rails.root.join('app', 'assets', 'files', 'dummy.pdf'))
+        publication_date = 2.weeks.ago + (rand 2000).days
+        Document.create!(
+            title: Faker::Lorem.sentence(2),
+            category_id: category.id,
+            uploader_id: member.id,
+            publication_date: publication_date,
+            file: file
+        )
+    end
 end
 
 puts "Creating blog articles"
