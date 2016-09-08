@@ -2,8 +2,8 @@ class Sulten::Reservation < ActiveRecord::Base
   belongs_to :table
   belongs_to :reservation_type
 
-  attr_accessible :reservation_from, :reservation_duration, :reservation_to, :people, :name,
-                  :telephone, :email, :allergies, :internal_comment, :table_id, :reservation_type_id, :reservation_duration
+  #attr_accessible :reservation_from, :reservation_duration, :reservation_to, :people, :name,
+  #                :telephone, :email, :allergies, :internal_comment, :table_id, :reservation_type_id, :reservation_duration
 
   attr_accessor :reservation_duration
 
@@ -12,7 +12,7 @@ class Sulten::Reservation < ActiveRecord::Base
 
   validate :check_opening_hours, :reservation_is_one_day_in_future, :check_amount_of_people, on: :create
 
-  validate :email, email: true
+  validates :email, email: true
 
   before_validation(on: :create) do
     should_break = false
