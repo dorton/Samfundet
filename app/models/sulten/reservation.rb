@@ -32,6 +32,10 @@ class Sulten::Reservation < ActiveRecord::Base
     self.reservation_to = reservation_from + reservation_duration.to_i.minutes
   end
 
+  before_validation(on: :update) do
+    self.reservation_to = reservation_from + reservation_duration.to_i.minutes
+  end
+
   after_validation(on: :create) do
     self.table = Sulten::Reservation.find_table(reservation_from, reservation_to, people, reservation_type_id)
 
