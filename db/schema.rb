@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160815191730) do
+ActiveRecord::Schema.define(:version => 20160908194145) do
 
   create_table "admissions", :force => true do |t|
     t.string   "title"
@@ -206,6 +206,30 @@ ActiveRecord::Schema.define(:version => 20160815191730) do
 
   create_table "external_organizers", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "feedback_answers", :force => true do |t|
+    t.integer  "feedback_question_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.decimal  "alternative"
+  end
+
+  create_table "feedback_feedbacks", :force => true do |t|
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "feedback_questions", :force => true do |t|
+    t.integer  "feedback_feedbacks_id"
+    t.string   "alternative_1"
+    t.string   "alternative_2"
+    t.string   "alternative_3"
+    t.string   "alternative_4"
+    t.string   "text"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "front_page_locks", :force => true do |t|

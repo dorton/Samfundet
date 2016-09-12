@@ -391,7 +391,31 @@ Area.all.each do |area|
       organizer = rand > 0.7 ? Group.order("RANDOM()").first : ExternalOrganizer.order("RANDOM()").first
       chosen_colors = colors.sample(2)
 
+      questions = []
+      15.times.each do
+        answers = []
+        rand(1..15).times.each do
+            answers.push Feedback::Answer.create!(
+              alternative: rand(1..4)
+            )
+        end
+
+        questions.push Feedback::Question.create!(
+          text: Faker::Lorem.sentence(5),
+          alternative_1: Faker::Lorem.sentence(5),
+          alternative_2: Faker::Lorem.sentence(5),
+          alternative_3: Faker::Lorem.sentence(5),
+          alternative_4: Faker::Lorem.sentence(5),
+          answers: answers
+        )
+      end
+
+      feedback = Feedback::Feedback.create!(
+        questions: questions
+      )
+
       Event.create!(
+        feedback: feedback,
         area_id: area.id,
         organizer_id: organizer.id,
         organizer_type: organizer.class.name,
