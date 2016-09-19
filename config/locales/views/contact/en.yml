@@ -16,7 +16,7 @@ en:
     problem_type: 'Problem'
     subject: 'Subject'
     description: 'Description'
-    description_min: 'Minimum length is 50 characters.'
+    description_min: 'Minimum text length is 50 characters.'
     subject_hint: 'Maximum subject length is 78 characters.'
     error_message: 'Something went wrong, your email has not been sent.'
     email_sent: 'Your email has been sent!'
