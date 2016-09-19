@@ -6,7 +6,7 @@ class AdmissionsAdmin::GroupsController < ApplicationController
 
   def show
     @admission = Admission.find(params[:admission_id])
-    @jobs = @group.jobs.find_all_by_admission_id(@admission.id)
+    @jobs = @group.jobs.where(admission: @admission)
     job_applications = @jobs.map(&:job_applications).flatten
 
     admission_start = @admission.shown_from.to_date
