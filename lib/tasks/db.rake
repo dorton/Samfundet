@@ -1,25 +1,28 @@
 namespace :db do
-  desc "TODO"
-  task :anonymize_admissions => :environment do
-    Applicant.where("phone != ?", "12345678").each do |applicant|
+  desc "This task removes all data from the database that can be associated with an applicant."
+  task anonymize_admissions: :environment do
+    Applicant.where(disabled: false).each do |applicant|
       password = Faker::Internet.password
+
       applicant.assign_attributes(
         firstname: Faker::Name.first_name,
         surname: Faker::Name.last_name,
-        phone: "12345678",
+        phone: Faker::Base.numerify("########"),
         email: Faker::Internet.email,
         password: password,
-        password_confirmation: password
+        password_confirmation: password,
+        disabled: true
       )
+
       applicant.save(validate: false)
     end
 
-    Interview.where("comment != ?", "").each do |interview|
+    Interview.where(comment: "").each do |interview|
       interview.assign_attributes(comment: "")
       interview.save(validate: false)
     end
 
-    JobApplication.where("motivation != ?", "").each do |job_application|
+    JobApplication.where(motivation: "").each do |job_application|
       job_application.assign_attributes(motivation: "")
       job_application.save(validate: false)
     end
